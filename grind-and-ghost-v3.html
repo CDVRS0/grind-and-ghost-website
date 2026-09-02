@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grind and Ghost Records</title>
+<link rel="canonical" href="https://www.grindandghost.com/">
+<meta property="og:url" content="https://www.grindandghost.com/">
+<meta property="og:title" content="Grind And Ghost Records">
+<meta property="og:site_name" content="Grind And Ghost Records">
+<meta name="description" content="Grind And Ghost Records — independent label, studios, distribution and events.">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,400;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#080808;
+  --black2:#111113;
+  --black3:#18181b;
+  --white:#ffffff;
+  --off:#a9a9ae;
+  --red:#D61221;
+  --red2:#b00e1b;
+  --dim:#3a3a3e;
+  --line:rgba(255,255,255,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;overflow-x:hidden;}
+::selection{background:var(--red);color:var(--white);}
+a{color:inherit;}
+img{display:block;max-width:100%;}
+
+/* ── GRAIN ── */
+.grain{position:fixed;inset:0;pointer-events:none;z-index:100;opacity:0.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in{opacity:1;transform:translateY(0);}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+/* ── HEADER ── */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:18px 5%;
+  background:linear-gradient(to bottom,rgba(8,8,8,0.97) 55%,transparent);
+  border-bottom:1px solid var(--line);
+  backdrop-filter:blur(8px);
+}
+.logo{
+  font-family:'Anton',sans-serif;font-size:1.05rem;letter-spacing:.05em;
+  color:var(--white);text-decoration:none;cursor:pointer;
+}
+.logo span{color:var(--red);}
+nav{display:flex;gap:26px;align-items:center;}
+nav a{
+  position:relative;color:var(--off);text-decoration:none;
+  font-family:'JetBrains Mono',monospace;font-size:.7rem;
+  letter-spacing:.05em;transition:color .2s;cursor:pointer;padding-bottom:3px;
+}
+nav a::after{
+  content:'';position:absolute;left:0;bottom:0;width:0;height:1px;
+  background:var(--red);transition:width .25s ease;
+}
+nav a:hover,nav a.active{color:var(--white);}
+nav a:hover::after,nav a.active::after{width:100%;}
+.nav-cta{
+  background:var(--red);color:var(--white)!important;
+  padding:9px 18px;font-family:'JetBrains Mono',monospace;
+  font-size:.7rem;letter-spacing:.05em;border:none;cursor:pointer;
+  transition:background .2s,transform .2s;text-decoration:none;
+}
+.nav-cta::after{display:none;}
+.nav-cta:hover{background:var(--red2);transform:translateY(-1px);}
+.burger{display:none;background:none;border:none;color:var(--white);
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;cursor:pointer;letter-spacing:.05em;}
+
+/* ── PAGES ── */
+.page{display:none;min-height:100svh;}
+.page.active{display:block;}
+
+/* ── HOME HERO ── */
+.hero{
+  min-height:100svh;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;text-align:center;
+  padding:120px 5% 60px;
+  background:radial-gradient(ellipse 60% 45% at 50% 32%,rgba(214,18,33,0.14),transparent 65%),var(--black);
+  position:relative;overflow:hidden;
+}
+.hero-video-wrap{
+  position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+}
+.hero-video-frame{
+  position:absolute;top:50%;left:50%;
+  width:100vw;height:56.25vw; /* 16:9 */
+  min-height:100%;min-width:177.78vh; /* keeps 16:9 covering any container */
+  transform:translate(-50%,-50%);
+}
+.hero-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 32%,rgba(214,18,33,0.18),transparent 65%),
+    linear-gradient(to bottom,rgba(8,8,8,.55) 0%,rgba(8,8,8,.75) 60%,rgba(8,8,8,.95) 100%);
+}
+.hero>*:not(.hero-video-wrap):not(.hero-overlay){position:relative;z-index:2;}
+.hero-logo{
+  width:min(72vw,520px);height:auto;
+  object-fit:contain;
+}
+.hero h1{
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:clamp(3.4rem,13vw,10.5rem);
+  line-height:.85;text-transform:uppercase;letter-spacing:.01em;
+}
+.hero h1 .grind{color:var(--white);}
+.hero h1 .and{
+  display:block;font-family:'Spectral',serif;font-style:italic;font-weight:400;
+  text-transform:none;font-size:.22em;color:var(--off);margin:.16em 0;letter-spacing:.02em;
+}
+.hero h1 .ghost{
+  color:transparent;-webkit-text-stroke:1.5px var(--white);
+  animation:flicker 8s ease-in-out infinite;
+}
+@keyframes flicker{0%,100%{opacity:1;}43%{opacity:1;}45%{opacity:.3;}47%{opacity:1;}74%{opacity:1;}75%{opacity:.5;}76%{opacity:1;}}
+.hero-sub{max-width:480px;margin-top:30px;color:var(--off);font-size:.95rem;line-height:1.7;}
+.hero-btns{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;justify-content:center;}
+.btn-primary{
+  background:var(--red);color:var(--white);padding:14px 30px;border:none;cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;
+  transition:.25s;text-decoration:none;display:inline-block;
+}
+.btn-primary:hover{background:var(--red2);transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(214,18,33,.5);}
+.btn-outline{
+  background:transparent;color:var(--white);padding:14px 30px;
+  border:1px solid var(--line);cursor:pointer;
+  font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;
+  transition:.25s;text-decoration:none;display:inline-block;
+}
+.btn-outline:hover{border-color:var(--white);transform:translateY(-2px);}
+.btn-white{background:var(--white);color:var(--black);padding:14px 30px;border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:.76rem;letter-spacing:.06em;transition:.25s;text-decoration:none;display:inline-block;}
+.btn-white:hover{background:var(--off);transform:translateY(-2px);}
+.scroll-hint{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.16em;color:var(--dim);
+}
+.scroll-hint::after{content:'';width:1px;height:32px;background:linear-gradient(var(--dim),transparent);animation:drip 2.4s ease-in-out infinite;}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top;opacity:0;}50%{opacity:1;transform:scaleY(1);}100%{opacity:0;transform:scaleY(1);}}
+@media(prefers-reduced-motion:reduce){.hero h1 .ghost{animation:none;}.scroll-hint::after{animation:none;}}
+
+/* ── MARQUEE ── */
+.marquee-wrap{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--black2);overflow:hidden;padding:16px 0;}
+.marquee{display:flex;width:max-content;animation:scroll-left 32s linear infinite;}
+.marquee span{
+  font-family:'Anton',sans-serif;font-size:1.1rem;text-transform:uppercase;
+  color:var(--dim);padding:0 26px;white-space:nowrap;letter-spacing:.02em;
+  display:flex;align-items:center;gap:26px;
+}
+.marquee span.hi{color:var(--white);}
+.marquee span::after{content:'•';color:var(--red);margin-left:26px;}
+@keyframes scroll-left{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media(prefers-reduced-motion:reduce){.marquee{animation:none;}}
+
+/* ── SECTION COMMONS ── */
+.section{padding:96px 5%;}
+.section-head{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  border-bottom:1px solid var(--line);padding-bottom:20px;margin-bottom:48px;
+  flex-wrap:wrap;gap:12px;
+}
+.section-head h2{
+  font-family:'Anton',sans-serif;font-weight:400;
+  font-size:clamp(1.8rem,3.5vw,2.7rem);text-transform:uppercase;letter-spacing:.01em;
+}
+.tag{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--off);letter-spacing:.05em;}
+
+/* ── RELEASES GRID ── */
+.releases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px;background:var(--line);border:1px solid var(--line);}
+.r-card{background:var(--black);aspect-ratio:1;position:relative;overflow:hidden;cursor:pointer;}
+.r-card[hidden]{display:none;}
+.release-search{display:flex;gap:12px;align-items:flex-end;margin-bottom:24px;}
+.release-search .field{max-width:520px;}
+.release-search input{width:100%;}
+.release-search button{background:transparent;color:var(--off);border:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:.7rem;letter-spacing:.05em;padding:10px 16px;cursor:pointer;transition:.2s;}
+.release-search button:hover{color:var(--white);border-color:var(--white);}
+.release-search-status{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--off);margin:-10px 0 18px;}
+.release-empty{display:none;padding:42px 24px;border:1px solid var(--line);color:var(--off);font-family:'JetBrains Mono',monospace;font-size:.75rem;text-align:center;}
+.release-empty.visible{display:block;}
+.r-card img{width:100%;height:100%;object-fit:cover;filter:grayscale(45%) brightness(.78);transition:filter .5s,transform .6s;}
+.r-card:hover img{filter:grayscale(0%) brightness(1);transform:scale(1.06);}
+.r-info{position:absolute;left:0;right:0;bottom:0;padding:16px;background:linear-gradient(to top,rgba(8,8,8,.97),transparent);}
+.r-info .artist{display:block;font-family:'JetBrains Mono',monospace;font-size:.62rem;letter-spacing:.08em;color:var(--red);margin-bottom:3px;}
+.r-info .title{font-family:'Spectral',serif;font-style:italic;font-size:1rem;}
+.badge{position:absolute;top:12px;right:12px;background:var(--red);color:var(--white);font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:3px 8px;}
+
+/* ── SERVICES ── */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);}
+.svc{background:var(--black2);padding:34px 26px;cursor:pointer;border-left:2px solid transparent;transition:.3s;}
+.svc:hover{background:var(--black3);border-color:var(--red);}
+.svc h3{font-family:'Anton',sans-serif;font-weight:400;font-size:1.3rem;text-transform:uppercase;margin-bottom:10px;}
+.svc p{color:var(--off);font-size:.86rem;line-height:1.6;}
+.svc .go{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--off);transition:color .2s;}
+.svc:hover .go{color:var(--red);}
+
+/* ── MANIFESTO ── */
+.manifesto{background:var(--black2);text-align:center;padding:110px 5%;}
+.manifesto blockquote{font-family:'Spectral',serif;font-style:italic;font-size:clamp(1.3rem,2.8vw,2.1rem);max-width:800px;margin:0 auto;line-height:1.55;color:var(--white);}
+.manifesto blockquote .accent{color:var(--red);font-style:normal;}
+
+/* ── SOCIAL HUB ── */
+.social-hub{background:var(--black);}
+.social-groups{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);}
+.social-group{background:var(--black2);padding:28px 30px;}
+.social-group-head{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap;}
+.social-group-head h3{font-family:'Anton',sans-serif;font-weight:400;font-size:1.15rem;text-transform:uppercase;}
+.social-group-head span{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--off);}
+.social-links{display:flex;flex-wrap:wrap;gap:10px;}
+.social-links a{
+  display:flex;align-items:center;gap:8px;
+  border:1px solid var(--line);padding:9px 16px;text-decoration:none;color:var(--off);
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.03em;
+  transition:.2s;
+}
+.social-links a svg{width:14px;height:14px;flex-shrink:0;stroke:currentColor;fill:none;}
+.social-links a:hover{background:var(--red);border-color:var(--red);color:var(--white);}
+
+/* ── ARTIST BIO CARDS ── */
+.page-hero{padding:150px 5% 76px;background:var(--black);border-bottom:1px solid var(--line);}
+.page-hero h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(2.6rem,7.5vw,6.5rem);text-transform:uppercase;line-height:.88;margin-bottom:22px;}
+.page-hero p{color:var(--off);max-width:560px;line-height:1.7;}
+
+.artist-bios{display:flex;flex-direction:column;gap:2px;background:var(--line);border:1px solid var(--line);}
+.artist-bio{background:var(--black2);padding:44px 5%;display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:start;}
+.artist-bio .avatar{
+  width:220px;height:220px;background:linear-gradient(160deg,#1a0000,#080808);
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.artist-bio .avatar img{width:100%;height:100%;object-fit:cover;filter:grayscale(35%) brightness(.85);}
+.artist-bio .avatar span{font-family:'Anton',sans-serif;font-size:2.4rem;color:rgba(214,18,33,.22);}
+.artist-bio h2{font-family:'Anton',sans-serif;font-weight:400;font-size:2rem;text-transform:uppercase;margin-bottom:6px;}
+.artist-bio .genre{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--red);letter-spacing:.06em;margin-bottom:16px;}
+.artist-bio p{color:var(--off);font-size:.9rem;line-height:1.75;margin-bottom:12px;max-width:640px;}
+.artist-bio .abio-socials{display:flex;gap:10px;margin-top:16px;}
+.artist-bio .abio-socials a{border:1px solid var(--line);padding:7px 14px;font-family:'JetBrains Mono',monospace;font-size:.68rem;text-decoration:none;color:var(--off);transition:.2s;display:flex;align-items:center;gap:6px;}
+.artist-bio .abio-socials a svg{width:12px;height:12px;stroke:currentColor;fill:none;}
+.artist-bio .abio-socials a:hover{background:var(--red);border-color:var(--red);color:var(--white);}
+@media(max-width:720px){.artist-bio{grid-template-columns:1fr;}.artist-bio .avatar{width:140px;height:140px;}}
+
+/* ── RELEASES PAGE ── */
+.releases-full{padding:40px 5% 100px;}
+
+/* ── ABOUT PAGE ── */
+.about-body{padding:60px 5% 40px;max-width:900px;}
+.about-body h2{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;margin-bottom:18px;margin-top:50px;}
+.about-body h2:first-child{margin-top:0;}
+.about-body p{color:var(--off);line-height:1.8;margin-bottom:16px;font-size:.95rem;}
+.about-body p strong{color:var(--white);}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;margin-top:14px;background:var(--line);border:1px solid var(--line);}
+.team-card{background:var(--black2);padding:28px 24px;}
+.team-card .name{font-family:'Anton',sans-serif;font-weight:400;font-size:1.2rem;text-transform:uppercase;}
+.team-card .role{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--red);letter-spacing:.05em;margin-top:6px;line-height:1.5;}
+.team-card .note{font-family:'Spectral',serif;font-style:italic;color:var(--off);font-size:.85rem;margin-top:10px;}
+
+/* ── REPEAT UK ── */
+.repeat-hero{background:linear-gradient(135deg,var(--red) 0%,#7a0000 100%);padding:150px 5% 76px;}
+.repeat-hero h1{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(2.6rem,7.5vw,6.5rem);text-transform:uppercase;line-height:.88;color:var(--white);margin-bottom:16px;}
+.repeat-hero p{color:rgba(255,255,255,.82);max-width:540px;line-height:1.7;}
+.plans-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;background:var(--line);}
+.plan{background:var(--black2);padding:34px 26px;}
+.plan.featured{background:var(--red);}
+.plan .plan-name{font-family:'Anton',sans-serif;font-weight:400;font-size:1.4rem;text-transform:uppercase;margin-bottom:16px;}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:26px;}
+.plan ul li{font-size:.85rem;color:var(--off);padding-left:16px;position:relative;line-height:1.5;}
+.plan.featured ul li{color:rgba(255,255,255,.88);}
+.plan ul li::before{content:'';position:absolute;left:0;top:.5em;width:5px;height:5px;background:var(--red);}
+.plan.featured ul li::before{background:var(--white);}
+.faq-list{display:flex;flex-direction:column;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{width:100%;background:none;border:none;color:var(--white);text-align:left;padding:20px 0;font-family:'Inter',sans-serif;font-size:.92rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;}
+.faq-q .icon{color:var(--red);font-size:1.1rem;flex-shrink:0;}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--off);font-size:.88rem;line-height:1.7;}
+.faq-a.open{max-height:300px;padding-bottom:18px;}
+
+/* ── GNG STUDIOS ── */
+.studios-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);margin-bottom:56px;}
+.studio-svc{background:var(--black2);padding:30px 24px;border-left:2px solid transparent;transition:.25s;}
+.studio-svc:hover{border-color:var(--red);background:var(--black3);}
+.studio-svc h3{font-family:'Anton',sans-serif;font-weight:400;font-size:1.1rem;text-transform:uppercase;margin-bottom:8px;}
+.studio-svc p{color:var(--off);font-size:.84rem;line-height:1.55;}
+.booking-cta{background:var(--red);padding:52px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:22px;}
+.booking-cta h2{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(1.5rem,3vw,2.2rem);text-transform:uppercase;color:var(--white);}
+.terms-box{background:var(--black2);padding:30px;border-left:2px solid var(--red);margin-top:14px;}
+.terms-box p{color:var(--off);font-size:.84rem;line-height:1.7;}
+.terms-box p+p{margin-top:10px;}
+
+/* ── PODCAST ── */
+.ep-list{display:flex;flex-direction:column;gap:2px;background:var(--line);}
+.ep{background:var(--black2);padding:24px 26px;display:flex;gap:18px;align-items:center;cursor:pointer;border-left:2px solid transparent;transition:.2s;}
+.ep:hover{background:var(--black3);border-color:var(--red);}
+.ep-num{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--dim);min-width:44px;}
+.ep-info{flex:1;}
+.ep-info h3{font-family:'Inter',sans-serif;font-weight:500;font-size:.92rem;margin-bottom:5px;}
+.ep-info .ep-meta{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--off);}
+
+/* ── EVENTS ── */
+.events-note{background:var(--black2);padding:34px;border-left:2px solid var(--red);}
+.events-note p{color:var(--off);font-size:.9rem;line-height:1.7;}
+.events-note p+p{margin-top:12px;}
+
+/* ── NO PRESSURE ── */
+.np-intro{padding:56px 5%;max-width:820px;}
+.np-intro p{color:var(--off);line-height:1.8;font-size:.95rem;margin-bottom:16px;}
+.np-facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:2px;background:var(--line);margin:36px 0;max-width:720px;}
+.np-fact{background:var(--black2);padding:20px;text-align:center;}
+.np-fact .country{font-family:'Anton',sans-serif;font-size:1rem;text-transform:uppercase;}
+
+/* ── CONTACT PAGE ── */
+.contact-wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;padding:56px 5% 40px;}
+.contact-left h2{font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(1.9rem,4vw,3rem);text-transform:uppercase;line-height:.95;margin-bottom:20px;}
+.contact-left p{color:var(--off);line-height:1.7;max-width:400px;margin-bottom:24px;}
+.contact-left a.email{font-family:'JetBrains Mono',monospace;color:var(--red);text-decoration:none;font-size:1rem;border-bottom:1px solid var(--red);padding-bottom:2px;}
+form{display:flex;flex-direction:column;gap:16px;}
+.row{display:flex;gap:16px;}
+.field{flex:1;display:flex;flex-direction:column;gap:5px;}
+label{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.06em;color:var(--off);}
+input,textarea{background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--white);font-family:'Inter',sans-serif;font-size:.92rem;padding:10px 2px;outline:none;transition:border-color .2s;}
+input:focus,textarea:focus{border-color:var(--red);}
+textarea{resize:vertical;min-height:88px;}
+.submit-btn{align-self:flex-start;background:var(--red);color:var(--white);border:none;font-family:'JetBrains Mono',monospace;font-size:.74rem;letter-spacing:.06em;padding:13px 26px;cursor:pointer;transition:.2s;margin-top:6px;}
+.submit-btn:hover{background:var(--red2);transform:translateY(-2px);}
+.form-success{font-family:'JetBrains Mono',monospace;font-size:.74rem;color:var(--red);margin-top:6px;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--line);padding:26px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+footer p{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--dim);}
+footer .f-logo{font-family:'Anton',sans-serif;font-size:.85rem;letter-spacing:.05em;}
+footer .f-logo span{color:var(--red);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .contact-wrap{grid-template-columns:1fr;gap:44px;}
+  .row{flex-direction:column;}
+  .booking-cta{flex-direction:column;text-align:center;}
+}
+@media(max-width:768px){
+  nav{position:fixed;top:0;right:0;height:100svh;width:74%;background:var(--black2);flex-direction:column;justify-content:center;gap:26px;padding:40px;transform:translateX(110%);transition:transform .35s ease;border-left:1px solid var(--line);z-index:49;}
+  nav.open{transform:translateX(0);}
+  nav a{font-size:.85rem;}
+  .burger{display:block;z-index:51;position:relative;}
+  .nav-cta{display:none;}
+  .artist-bio{padding:34px 6%;}
+}
+@media(max-width:520px){
+  .release-search{align-items:stretch;flex-direction:column;}
+  .release-search .field{max-width:none;}
+}
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="logo" onclick="go('home')">GRIND<span>AND</span>GHOST</div>
+  <button class="burger" id="burger">MENU</button>
+  <nav id="nav">
+    <a onclick="go('home')">Home</a>
+    <a onclick="go('artists')">Artists</a>
+    <a onclick="go('releases')">Releases</a>
+    <a onclick="go('about')">About</a>
+    <a onclick="go('podcast')">Podcast</a>
+    <a onclick="go('repeat')">Repeat UK</a>
+    <a onclick="go('studios')">Studios</a>
+    <a onclick="go('events')">Events</a>
+    <a onclick="go('nopressure')">No Pressure</a>
+    <a onclick="go('contact')" class="nav-cta">Contact</a>
+  </nav>
+</header>
+
+<!-- ══════════════════════════════ HOME ══════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <div class="hero">
+    <div class="hero-video-wrap">
+      <video class="hero-video-frame" src="Images%20/0902.mp4"
+        autoplay muted loop playsinline preload="auto"
+        aria-label="Grind and Ghost background video"></video>
+    </div>
+    <div class="hero-overlay"></div>
+    <img class="hero-logo" src="Images%20/GhostNGrind%20F2-11%20-%20Transparent.png" alt="Grind and Ghost">
+    <p class="hero-sub">An independent record label building artists, music and culture on their own terms.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="go('artists')">Our Artists</button>
+      <button class="btn-outline" onclick="go('studios')">Book a Session</button>
+    </div>
+    <div class="scroll-hint">SCROLL</div>
+  </div>
+
+  <div class="marquee-wrap">
+    <div class="marquee">
+      <span class="hi">CDVRS</span><span>HAVANA</span><span class="hi">PALMZZ</span><span>NOAAH</span><span class="hi">REPEAT UK</span><span>GNG STUDIOS</span><span class="hi">NO PRESSURE</span><span>GNG EVENTS</span>
+      <span class="hi">CDVRS</span><span>HAVANA</span><span class="hi">PALMZZ</span><span>NOAAH</span><span class="hi">REPEAT UK</span><span>GNG STUDIOS</span><span class="hi">NO PRESSURE</span><span>GNG EVENTS</span>
+    </div>
+  </div>
+
+  <!-- RELEASES PREVIEW -->
+  <div class="section reveal">
+    <div class="section-head">
+      <h2>Latest Releases</h2>
+      <span class="tag" style="cursor:pointer;color:var(--red);" onclick="go('releases')">View all →</span>
+    </div>
+    <div class="releases-grid">
+      <div class="r-card">
+        <img src="Images /DMULLS.jpeg" alt="DMULLS"">
+         <span class="badge">Out Now</span>
+        <div class="r-info"><span class="artist">Deera Mulls</span><span class="title">CRB</span></div>
+      </div>
+      <div class="r-card">
+        <img src="Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - SOUTHBOUND">
+         <span class="badge">Out Now</span>
+        <div class="r-info"><span class="artist">CDVRS</span><span class="title">SOUTHBOUND</span></div>
+      </div>
+      <div class="r-card">
+        <img src="Images /PEACE_VS_ CHAOS.png" alt="CDVRS - PEACE VS CHAOS">
+        <div class="r-info"><span class="artist">CDVRS</span><span class="title">PEACE VS CHAOS</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_d2923ff22c974ed7b32b780286e2e3c5~mv2.jpg" alt="Havana - Love Havana EP"> 
+        <div class="r-info"><span class="artist">Havana</span><span class="title">Love Havana (EP)</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_7c61aa3bfbd144419d035ca2f19e7826~mv2.jpg" alt="SAINTAIR - Sell Me Your Sunshine">
+        <div class="r-info"><span class="artist">SAINTAIR</span><span class="title">Sell Me Your Sunshine</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_87e1a03a274740d29d9d958937e986d7~mv2.jpg" alt="Havana - Wondering">
+        <div class="r-info"><span class="artist">Havana</span><span class="title">Wondering</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_7ccad37628ee4de1a29ada52da807a7f~mv2.jpg" alt="No Pressure, LilCR - Like What">
+        <div class="r-info"><span class="artist">No Pressure &amp; LilCR</span><span class="title">Like What</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_4cae421cd06b4369b6131d1e48c30961~mv2.jpg" alt="Palmzz - Hoe">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Hoe</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_c8d96eed6a75495cbfdb6a099d508cf4~mv2.png" alt="Marlz - Coulda Been Us">
+        <div class="r-info"><span class="artist">Marlz</span><span class="title">Coulda Been Us</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div class="section reveal" style="padding-top:0;">
+    <div class="section-head">
+      <h2>What We Do</h2>
+      <span class="tag">Grind And Ghost</span>
+    </div>
+    <div class="services-grid">
+      <div class="svc" onclick="go('studios')">
+        <h3>GNG Studios</h3>
+        <p>Recording, mixing, mastering, artist development and visual production, for any age group at any stage of their career.</p>
+        <div class="go">Book a session →</div>
+      </div>
+      <div class="svc" onclick="go('repeat')">
+        <h3>Repeat UK</h3>
+        <p>Our distribution arm, getting independent music onto every major platform worldwide.</p>
+        <div class="go">Start distributing →</div>
+      </div>
+      <div class="svc" onclick="go('events')">
+        <h3>GNG Events</h3>
+        <p>Live shows, parties and experiences that put our artists in front of real audiences.</p>
+        <div class="go">See events →</div>
+      </div>
+      <div class="svc" onclick="go('nopressure')">
+        <h3>No Pressure</h3>
+        <p>An artist discovery platform finding and elevating talent from around the world.</p>
+        <div class="go">Meet the roster →</div>
+      </div>
+      <div class="svc" onclick="go('podcast')">
+        <h3>GNG Podcast</h3>
+        <p>In-depth interviews with the voices shaping the culture and business of music.</p>
+        <div class="go">Listen now →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANIFESTO -->
+  <div class="manifesto reveal">
+    <blockquote>
+      We believe in community as well as artistic excellence — helping our people grow and represent where they're from in a way that feels <span class="accent">true</span>. Staying rooted in our values, we push toward the kind of digital innovation that lets people get properly <span class="accent">lost</span> in the music.
+    </blockquote>
+  </div>
+
+  <!-- SOCIAL HUB -->
+  <div class="section social-hub reveal">
+    <div class="section-head">
+      <h2>Connect With Us</h2>
+      <span class="tag">Follow the whole family</span>
+    </div>
+    <div class="social-groups">
+      <div class="social-group">
+        <div class="social-group-head"><h3>Grind And Ghost</h3><span>Label </span></div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/grindandghost/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>Instagram</a>
+          <a href="https://www.youtube.com/@grindandghostrecords/featured" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>YouTube</a>
+          <a href="https://www.tiktok.com/@grindandghost?lang=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3v10.5a3 3 0 1 1-3-3"/><path d="M14 3c0 3 2.5 5 5 5"/></svg>TikTok</a>
+          <a href="https://open.spotify.com/artist/0DGQqQUltmg7eUOd0HeUaS" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7 10c3-1 8-1 10 1M7.5 13c2.5-.8 6.5-.6 8.5.8M8 16c2-.5 5-.4 6.5.6"/></svg>Spotify</a>
+          <a href="https://uk.linkedin.com/in/ayo-peters-698222203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4.5c0-1.5 1-2.5 2.5-2.5S17 11 17 12.5V17M12 10.5V17"/></svg>LinkedIn</a>
+        </div>
+      </div>
+      <div class="social-group">
+        <div class="social-group-head"><h3>Repeat UK</h3><span>Distribution</span></div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/repeat.uk/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>Instagram</a>
+          <a href="https://www.tiktok.com/@repeat.uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3v10.5a3 3 0 1 1-3-3"/><path d="M14 3c0 3 2.5 5 5 5"/></svg>TikTok</a>
+        </div>
+      </div>
+      <div class="social-group">
+        <div class="social-group-head"><h3>No Pressure Entertainment</h3><span>Artist discovery platform</span></div>
+        <div class="social-links">
+          <a href="https://www.cdvrswrld.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>www.cdvrswrld.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT CTA -->
+  <div class="section reveal" style="text-align:center;">
+    <h2 style="font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(2rem,5vw,4rem);text-transform:uppercase;margin-bottom:18px;">Work With Us</h2>
+    <p style="color:var(--off);max-width:440px;margin:0 auto 30px;line-height:1.7;">Artist, partner or fan — we want to hear from you.</p>
+    <button class="btn-primary" onclick="go('contact')">Get in Touch</button>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════ ARTISTS ══════════════════════════════ -->
+<div id="page-artists" class="page">
+  <div class="page-hero">
+    <h1>Our<br><span style="color:var(--red);">Artists</span></h1>
+    <p>The roster building the sound of Grind And Ghost, one release at a time.</p>
+  </div>
+  <div class="section">
+    <div class="artist-bios">
+      <div class="artist-bio">
+        <div class="avatar"><img src="Images%20/CDVRS.JPG" alt="CDVRS"></div>
+        <div>
+          <h2>CDVRS</h2>
+          <div class="genre">Producer &amp; Engineer</div>
+          <p>CDVRS (Cameron Dankwa) is a UK-based engineer and producer known for his work in urban and commercial music. His passion for music started in school, and by university he'd moved into engineering — using the COVID lockdowns to dive deeper into production with Logic and FL Studio, studying the greats along the way.</p>
+          <p>What began as beat-making grew into a deeper love for mixing, taught largely through tutorials and mixing vocals for friends before his debut track with BabyBell (now MUDMUNI). By summer 2020 he'd expanded across university networks connecting with artists UK-wide, and in 2022 launched No Pressure — a platform now working with talent across France, Italy, Ghana and beyond. Today CDVRS runs his own collective alongside Grind and Ghost Records.</p>
+          <div class="abio-socials">
+            <a href="https://www.instagram.com/camerondankwa/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@cdvrs_?lang=en" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://open.spotify.com/artist/5DWvafXQFBWjVcG9mfQ22t" target="_blank" rel="noopener">Spotify</a>
+          </div>
+        </div>
+      </div>
+      <div class="artist-bio">
+        <div class="avatar"><img src="https://static.wixstatic.com/media/d47fe6_bf6500ea6e034bfa80d9725136d5be0f~mv2.jpg" alt="Havana"></div>
+        <div>
+          <h2>Havana</h2>
+          <div class="genre">Alternative R&amp;B</div>
+          <p>Havana is a London-based alternative R&amp;B singer-songwriter carving out a distinctive space with her deeply soulful sound and emotionally honest approach to music. Known for her rich vocal tone and transparent songwriting, she blends modern R&amp;B with the warmth of neo-soul.</p>
+          <p>Her artistry explores loyalty, self-worth, desire and emotional growth — balancing vulnerability with confidence so the music feels personal yet universally relatable. As her presence in the UK R&amp;B scene keeps rising, she stands out for her honesty, depth and unmistakable soul.</p>
+          <div class="abio-socials">
+            <a href="https://www.instagram.com/havanabtw/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@havanabtw" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://open.spotify.com/artist/0py69XCDWIykl7VofDhOk2" target="_blank" rel="noopener">Spotify</a>
+          </div>
+        </div>
+      </div>
+      <div class="artist-bio">
+        <div class="avatar"><img src="https://static.wixstatic.com/media/d47fe6_7981cbf50643439580890d826deadb02~mv2.jpg" alt="Palmzz"></div>
+        <div>
+          <h2>Palmzz</h2>
+          <div class="genre">UK Rap</div>
+          <p>One of the newer signings to the Grind and Ghost family, Palmzz brings a unique sound and undeniable energy to the roster. With a fast-growing catalogue and thrilling plans in motion, Palmzz is set to make real waves in the industry.</p>
+          <div class="abio-socials">
+            <a href="https://www.instagram.com/palmzz.ldn/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@palmzz.ldn?lang=en" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://open.spotify.com/artist/7B9W97wIupnqvsJVRK7XYB" target="_blank" rel="noopener">Spotify</a>
+          </div>
+        </div>
+      </div>
+      <div class="artist-bio">
+        <div class="avatar"><img src="https://static.wixstatic.com/media/d47fe6_d04edb1b49774a1487116ff09b71d0df~mv2.jpg" alt="Noaah"></div>
+        <div>
+          <h2>Noaah</h2>
+          <div class="genre">R&amp;B / Pop</div>
+          <p>Noaah — the extra "A" a mark of his own artistic identity — is a London-based artist making music that aims to connect on a personal level. His lyrics invite listeners to find their own experience inside his, and he deeply values everyone who takes the time to sit with his music.</p>
+          <div class="abio-socials">
+            <a href="https://www.instagram.com/noaahmsc/?hl=en-gb" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://open.spotify.com/artist/3Og0HlgdW9l89ref8rY5DX" target="_blank" rel="noopener">Spotify</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ RELEASES ══════════════════════════════ -->
+<div id="page-releases" class="page">
+  <div class="page-hero">
+    <h1>Releases</h1>
+    <p>Everything that's come out of Grind And Ghost. </p>
+  </div>
+  <div class="releases-full">
+    <div class="release-search">
+      <div class="field">
+        <label for="releaseSearch">Search releases</label>
+        <input id="releaseSearch" type="search" placeholder="Search by song or artist" autocomplete="off">
+      </div>
+      <button id="clearReleaseSearch" type="button">Clear</button>
+    </div>
+    <p id="releaseSearchStatus" class="release-search-status" aria-live="polite"></p>
+    <div class="releases-grid">
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_d2923ff22c974ed7b32b780286e2e3c5~mv2.jpg" alt="Havana - Love Havana EP">
+        <div class="r-info"><span class="artist">Havana</span><span class="title">Love Havana (EP)</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_7c61aa3bfbd144419d035ca2f19e7826~mv2.jpg" alt="SAINTAIR - Sell Me Your Sunshine">
+        <div class="r-info"><span class="artist">SAINTAIR</span><span class="title">Sell Me Your Sunshine</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_87e1a03a274740d29d9d958937e986d7~mv2.jpg" alt="Havana - Wondering">
+        <div class="r-info"><span class="artist">Havana</span><span class="title">Wondering</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_7ccad37628ee4de1a29ada52da807a7f~mv2.jpg" alt="No Pressure, LilCR - Like What">
+        <div class="r-info"><span class="artist">No Pressure &amp; LilCR</span><span class="title">Like What</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_4cae421cd06b4369b6131d1e48c30961~mv2.jpg" alt="Palmzz - Hoe">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Hoe</span></div>
+      </div>
+      <div class="r-card">
+        <img src="https://static.wixstatic.com/media/d47fe6_c8d96eed6a75495cbfdb6a099d508cf4~mv2.png" alt="Marlz - Coulda Been Us">
+        <div class="r-info"><span class="artist">Marlz</span><span class="title">Coulda Been Us</span></div>
+      </div>
+      <a class="r-card" href="https://ffm.to/8dxd248" target="_blank" rel="noopener">
+        <img src="Images /LUCKY.jpeg" alt="SoLore - LUCKY$TARZ">
+        <div class="r-info"><span class="artist">SoLore</span><span class="title">LUCKY$TARZ</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=ttB4kMAkF6I" target="_blank" rel="noopener">
+        <img src="Images /Body_Litefeet.jpg" alt="wspkartel - Body Litefeet">
+        <div class="r-info"><span class="artist">wspkartel</span><span class="title">Body Litefeet</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=-QPo3XJRsmM" target="_blank" rel="noopener">
+        <img src="Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - BAKE">
+        <div class="r-info"><span class="artist">CDVRS</span><span class="title">BAKE</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=TC-XBI7aqm0" target="_blank" rel="noopener">
+        <img src="/Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - SOUTHBOUND">
+        <div class="r-info"><span class="artist">CDVRS</span><span class="title">SOUTHBOUND</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=UAF0eF-xTvo" target="_blank" rel="noopener">
+        <img src="Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - REFLECT">
+        <div class="r-info"><span class="artist">CDVRS</span><span class="title">REFLECT</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=FzxCkDV_iBc" target="_blank" rel="noopener">
+        <img src="Images /CHLOE.jpeg" alt="Chloe May">
+        <div class="r-info"><span class="artist">Chloe May</span><span class="title">The Beginning of Chloe May</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=_l9l0o05L94" target="_blank" rel="noopener">
+        <img src="Images /TWISTT.jpeg" alt="Twistt - SHINE">
+        <div class="r-info"><span class="artist">Twistt</span><span class="title">SHINE</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=ZS8SCw09K9w" target="_blank" rel="noopener">
+        <img src="Images /PEACE_VS_ CHAOS.png" alt="CDVRS - Peace VS Chaos">
+        <div class="r-info"><span class="artist">CDVRS</span><span class="title">PEACE VS CHAOS</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=2wVzSHLqcZo" target="_blank" rel="noopener">
+        <img src="Images /SAINTAIR__Sell Me...__3000x3000@72dpi.jpg" alt="Saintair - Sell Me Your Sunshine">
+        <div class="r-info"><span class="artist">Saintair</span><span class="title">Sell Me Your Sunshine</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=VLI0Nil7-50" target="_blank" rel="noopener">
+        <img src="Images /DRUNK.jpg" alt="LeeLee XI - Drunk Dial">
+        <div class="r-info"><span class="artist">LeeLee XI</span><span class="title">Drunk Dial</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=7odyraJ0sSk" target="_blank" rel="noopener">
+        <img src="Images /I_m_Back_Freestyle.jpg" alt="TeeJay - I'm Back Freestyle">
+        <div class="r-info"><span class="artist">TeeJay</span><span class="title">I'm Back Freestyle</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=MNdzWJAGCgA" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/MNdzWJAGCgA/hqdefault.jpg" alt="Mizzofficial - Lightning Mcqueen">
+        <div class="r-info"><span class="artist">Mizzofficial</span><span class="title">Lightning Mcqueen</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=KxIU_V75AOc" target="_blank" rel="noopener">
+        <img src="Images /MIM.jpg" alt="MIM - WEAZY">
+        <div class="r-info"><span class="artist">MIM</span><span class="title">WEAZY (EP)</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=BHayBofoqSQ" target="_blank" rel="noopener">
+        <img src="Images /IGORANCE IS BLISS.jpg" alt="Noaah - Ignorance Is Bliss">
+        <div class="r-info"><span class="artist">Noaah</span><span class="title">Ignorance Is Bliss</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=Rvm-QvUnS9g" target="_blank" rel="noopener">
+        <img src="Images /RED FLAG.jpg" alt="Noaah - Red Flag (Endless Love)">
+        <div class="r-info"><span class="artist">Noaah</span><span class="title">Red Flag (Endless Love)</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=6fmKuH7Gdsw" target="_blank" rel="noopener">
+        <img src="Images /ITS US.jpg" alt="Noaah feat. AstrowBeatz - IT'S US">
+        <div class="r-info"><span class="artist">Noaah </span><span class="title">IT'S US (EP)</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=c5IetuNRnKU" target="_blank" rel="noopener">
+        <img src="Images /Say_It_Right.jpg" alt="Tochi - Say It Right">
+        <div class="r-info"><span class="artist">Tochi</span><span class="title">Say It Right</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=KqUlzvnHW10" target="_blank" rel="noopener">
+        <img src="Images /WYTM.png" alt="Palmzz feat. Fmilli - WYTM G?">
+        <div class="r-info"><span class="artist">Palmzz feat. Fmilli</span><span class="title">WYTM G?</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=nRSqCgOmahA" target="_blank" rel="noopener">
+        <img src="Images /Nails & Toes.png" alt="Palmzz - Nails &amp; Toes">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Nails &amp; Toes</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=XtZkNIY19jM" target="_blank" rel="noopener">
+        <img src="Images /CORRECTANDSMOOTH.jpg" alt="Idris Miles feat. Megamikes - CORRECTANDSMOOTH">
+        <div class="r-info"><span class="artist">Idris Miles feat. Megamikes</span><span class="title">CORRECTANDSMOOTH</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=JUQCbIO3Y3c" target="_blank" rel="noopener">
+        <img src="Images /Amsterdam Remix.jpg" alt="Palmzz &amp; CD - Amsterdam Remix">
+        <div class="r-info"><span class="artist">Palmzz &amp; CD</span><span class="title">Amsterdam Remix</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=NBqx1FXTA9o" target="_blank" rel="noopener">
+        <img src="Images /Body_On_My_Mind.jpg" alt="Alyssa Palmer - Body On My Mind">
+        <div class="r-info"><span class="artist">Alyssa Palmer</span><span class="title">Body On My Mind</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=fkRj1qdJPOw" target="_blank" rel="noopener">
+        <img src="Images /BOUNCE.PNG" alt="CD - Bounce">
+        <div class="r-info"><span class="artist">CD</span><span class="title">Bounce</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=X8XFz0BtJks" target="_blank" rel="noopener">
+        <img src="Images /MVNCH.jpeg" alt="Mvnch - Bad Actress">
+        <div class="r-info"><span class="artist">Mvnch</span><span class="title">Bad Actress</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=_zsDQ39vovI" target="_blank" rel="noopener">
+        <img src="Images /AMSTERDAM.jpg" alt="Palmzz - Amsterdam">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Amsterdam</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=HvRk1_Dx_4k" target="_blank" rel="noopener">
+        <img src="Images /CRASH & MILL.jpg" alt="Palmzz - Million Jibbz">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Million Jibbz</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=UMuutGg8RUs" target="_blank" rel="noopener">
+        <img src="Images /CRASH & MILL.jpg" alt="Palmzz - Crash Out">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Crash Out</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=KhF_feOTzGQ" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/KhF_feOTzGQ/hqdefault.jpg" alt="Palmzz - U Sure?">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">U Sure?</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=TJhKnF90pqY" target="_blank" rel="noopener">
+        <img src="Images /BUGGIN.jpeg" alt="Palmzz - Buggin">
+        <div class="r-info"><span class="artist">Palmzz</span><span class="title">Buggin'</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=5hYPG9fFkwQ" target="_blank" rel="noopener">
+        <img src="Images /LDCE.jpeg" alt="Paria - Love Don't Come Easy">
+        <div class="r-info"><span class="artist">Paria</span><span class="title">Love Don't Come Easy</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=fZXKLdoH7qk" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/fZXKLdoH7qk/hqdefault.jpg" alt="GIGI TANASE - Pull Up">
+        <div class="r-info"><span class="artist">GIGI TANASE</span><span class="title">Pull Up</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=RMmIExtIzys" target="_blank" rel="noopener">
+        <img src="Images /The_Watchlist__Vol__1.jpg" alt="Grind And Ghost - The Watchlist Vol. 1">
+        <div class="r-info"><span class="artist">Grind And Ghost</span><span class="title">The Watchlist Vol. 1</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=4hwOsRdNQ5k" target="_blank" rel="noopener">
+        <img src="Images /Captain.jpg" alt="Noaah - Captain">
+        <div class="r-info"><span class="artist">Noaah</span><span class="title">Captain</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=ACPX_73rHAA" target="_blank" rel="noopener">
+        <img src="Images /Overrated.jpg" alt="ZayGwop - Overrated">
+        <div class="r-info"><span class="artist">ZayGwop</span><span class="title">Overrated</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=B1I5YH-6bx8" target="_blank" rel="noopener">
+        <img src="Images /Closer.jpg" alt="J1Remz - Closer">
+        <div class="r-info"><span class="artist">J1Remz</span><span class="title">Closer</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=VYf77sdjCHw" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/VYf77sdjCHw/hqdefault.jpg" alt="Mizzofficial - Let's Go">
+        <div class="r-info"><span class="artist">Mizzofficial</span><span class="title">Let's Go</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=q7JnUaFEaoQ" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/q7JnUaFEaoQ/hqdefault.jpg" alt="Mizzofficial X Teejay - If I Told You">
+        <div class="r-info"><span class="artist">Mizzofficial X Teejay</span><span class="title">If I Told You</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=1Xj27O0Co3Y" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/1Xj27O0Co3Y/hqdefault.jpg" alt="Elzee - This Life">
+        <div class="r-info"><span class="artist">Elzee</span><span class="title">This Life</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=XC8xkSfcOl8" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/XC8xkSfcOl8/hqdefault.jpg" alt="Mizzofficial - All Night">
+        <div class="r-info"><span class="artist">Mizzofficial</span><span class="title">All Night</span></div>
+      </a>
+      <a class="r-card" href="https://www.youtube.com/watch?v=LUkCPGrl8DY" target="_blank" rel="noopener">
+        <img src="https://i.ytimg.com/vi/LUkCPGrl8DY/hqdefault.jpg" alt="Loose - Toxic (DTB)">
+        <div class="r-info"><span class="artist">Loose</span><span class="title">Toxic (DTB)</span></div>
+      </a>
+    </div>
+    <p id="releaseSearchEmpty" class="release-empty">No releases match your search.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <h1>About<br><span style="color:var(--red);">Us</span></h1>
+  </div>
+  <div class="about-body section" style="padding-top:50px;">
+    <h2>Who Are We</h2>
+    <p><strong>Founder &amp; CEO — Ayo Peters</strong></p>
+    <p>Ayo S. Peters is a young entrepreneur who established his own record label at the age of 17 — a dream he'd been carrying since 14, which in his own words stems from "always having loved the idea of helping artists, supporting their creative vision and representing them."</p>
+    <p>While studying at Westminster University, where he graduated in 2024, Ayo was able to establish his own production company and used his skills to offer high-quality music and video production services. He took the vision further, entering the event management world under the Grind and Ghost umbrella, followed by an internationally run record label established by Cameron Dankwa.</p>
+    <p>With Cameron, he expanded by incorporating a publishing and distribution branch to enable more artists to reach new heights. The mission with Grind and Ghost is to collaborate with creative and passionate individuals all over the world to provide services to artists and the music industry.</p>
+    <p>Led by his drive to give back to society, Ayo also founded his own Community Interest Company to benefit young people across a range of career paths, creating opportunities for individuals who have walked where he has and bringing people together through various art forms.</p>
+
+    <h2>The Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="name">Ayo Peters</div>
+        <div class="role">Founder, CEO &amp; President</div>
+      </div>
+      <div class="team-card">
+        <div class="name">Cameron 'CD' Dankwa</div>
+        <div class="role">Creative Director<br>Founder &amp; CEO of No Pressure Entertainment</div>
+      </div>
+      <div class="team-card">
+        <div class="name">Shrey Suchak</div>
+        <div class="role">Head of Legal and Business Affairs Consultant<br>Founder of Illuminate Consulting</div>
+        <div class="note">"Training to qualify as a solicitor"</div>
+      </div>
+    </div>
+
+    <h2>Company Info</h2>
+    <p>Grind and Ghost Ltd is registered in England and Wales under company registration number <strong>15824941</strong>.</p>
+    <p>Contact: <a href="mailto:info@grindandghost.com" style="color:var(--red);">info@grindandghost.com</a></p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ PODCAST ══════════════════════════════ -->
+<div id="page-podcast" class="page">
+  <div class="page-hero">
+    <h1>Grind &amp; Ghost<br><span style="color:var(--red);">Podcast</span></h1>
+    <p>A platform spotlighting influential voices from the music industry — professionals, artists, executives and creatives who've left their mark on the culture and business of music. Guests share their journeys, insights and the moments that shaped the scene, offering knowledge and inspiration to the next generation of talent.</p>
+  </div>
+  <div class="section">
+    <div class="section-head"><h2>Episodes</h2><span class="tag">New episodes dropping</span></div>
+    <div class="ep-list">
+      <div class="ep">
+        <span class="ep-num">EP 10</span>
+        <div class="ep-info">
+          <h3>Joseph Brice — Audio Engineer at Metropolis Studios</h3>
+          <div class="ep-meta">
+            <a href="https://open.spotify.com/show/7L7mT0xVDWUYKUgeixqra3" target="_blank" style="color:var(--red);text-decoration:none;">Spotify</a> ·
+            <a href="https://www.youtube.com/watch?v=lTW9ziEApAU" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 09</span>
+        <div class="ep-info">
+          <h3>DJ Tobz</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=2vtlHtRsGwY" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 08</span>
+        <div class="ep-info">
+          <h3>MCE Music Group</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=bYptxL3QYcU" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 07</span>
+        <div class="ep-info">
+          <h3>AJ and Umair — Artist, Major Labels &amp; Management</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=KoaIkWWocVc" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 06</span>
+        <div class="ep-info">
+          <h3>Lamar Waves</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=qAmHY_4u33k" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 05</span>
+        <div class="ep-info">
+          <h3>SK &amp; TK — Finesse Foreva</h3>
+          <div class="ep-meta">
+            <a href="https://open.spotify.com/episode/5KFcXqM6aAHcTVSKSMpU7W" target="_blank" style="color:var(--red);text-decoration:none;">Spotify</a> ·
+            <a href="https://www.youtube.com/watch?v=BqIqx_bo0W4" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 04</span>
+        <div class="ep-info">
+          <h3>AJ &amp; Umair — The Changing Landscape of the Music Industry</h3>
+          <div class="ep-meta">
+            <a href="https://open.spotify.com/show/7L7mT0xVDWUYKUgeixqra3" target="_blank" style="color:var(--red);text-decoration:none;">Spotify</a> ·
+            <a href="https://www.youtube.com/watch?v=QRGTN3l0sLg" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a>
+          </div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 03</span>
+        <div class="ep-info">
+          <h3>Charlie Torrible — Head of Data Insight</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=WLkdTBYTceQ" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 02</span>
+        <div class="ep-info">
+          <h3>Lloyd Murray — A&amp;R Manager</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=LXPcZ3951Qk" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">EP 01</span>
+        <div class="ep-info">
+          <h3>Sadiq — Finding Your Way in the Music Industry</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=vGTrWGEpXWY" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">INTRO</span>
+        <div class="ep-info">
+          <h3>Podcast Introduction — Hosted by Tatenda Ocean</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=pPAvE2eBNMI" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+      <div class="ep">
+        <span class="ep-num">INTRO</span>
+        <div class="ep-info">
+          <h3>Podcast Introduction</h3>
+          <div class="ep-meta"><a href="https://www.youtube.com/watch?v=ke2-wAku-Rw" target="_blank" style="color:var(--red);text-decoration:none;">YouTube</a></div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:44px;">
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="https://open.spotify.com/show/7L7mT0xVDWUYKUgeixqra3" target="_blank" class="btn-outline">Listen on Spotify</a>
+        <a href="https://www.youtube.com/@grindandghostrecords/featured" target="_blank" class="btn-outline">Watch on YouTube</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ REPEAT UK ══════════════════════════════ -->
+<div id="page-repeat" class="page">
+  <div class="repeat-hero">
+    <h1>Repeat<br>UK</h1>
+    <p>Our distribution arm. Get your music onto every major platform worldwide — Spotify, Apple Music, TIDAL, Amazon and more. Built specifically for independent UK artists.</p>
+  </div>
+  <div class="section">
+    <div class="section-head"><h2>Plans</h2><span class="tag">Choose what works for you</span></div>
+    <div class="plans-grid">
+      <div class="plan">
+        <div class="plan-name">Starter</div>
+        <ul>
+          <li>1 single distributed</li>
+          <li>All major platforms</li>
+          <li>Basic analytics</li>
+          <li>GNG team support</li>
+        </ul>
+        <button class="btn-outline" onclick="go('contact')">Get started</button>
+      </div>
+      <div class="plan featured">
+        <div class="plan-name">Artist</div>
+        <ul>
+          <li>Unlimited releases</li>
+          <li>All major platforms</li>
+          <li>Full analytics dashboard</li>
+          <li>Priority support</li>
+          <li>Playlist pitching</li>
+          <li>Pre-save campaigns</li>
+        </ul>
+        <button class="btn-white" onclick="go('contact')">Start distributing</button>
+      </div>
+      <div class="plan">
+        <div class="plan-name">Label</div>
+        <ul>
+          <li>Unlimited releases &amp; artists</li>
+          <li>Advanced analytics</li>
+          <li>Dedicated account manager</li>
+          <li>Playlist &amp; editorial pitching</li>
+          <li>Marketing campaign support</li>
+        </ul>
+        <button class="btn-outline" onclick="go('contact')">Talk to us</button>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0;">
+    <div class="section-head"><h2>FAQs</h2></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">How long does distribution take? <span class="icon">+</span></button>
+        <div class="faq-a">Most platforms go live within 3–5 business days. We recommend submitting at least two weeks before your release date to allow time for pitching and pre-saves.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Do I keep my rights? <span class="icon">+</span></button>
+        <div class="faq-a">Yes, always. Repeat UK is a distribution service, not a label deal. You own your masters and your publishing — we simply get your music out there.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">When do I get paid? <span class="icon">+</span></button>
+        <div class="faq-a">Royalties are paid monthly once platforms report them. Typical reporting cycles mean earnings from a given month usually appear about two months later.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">Which platforms do you distribute to? <span class="icon">+</span></button>
+        <div class="faq-a">Spotify, Apple Music, TIDAL, Amazon Music, YouTube Music, Deezer, TikTok and 40+ more. If a platform exists, your music will be there.</div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="padding-top:0;">
+    <div class="section-head"><h2>Follow Repeat UK</h2></div>
+    <div class="social-links">
+      <a href="https://www.instagram.com/repeat.uk/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>Instagram</a>
+      <a href="https://www.tiktok.com/@repeat.uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3v10.5a3 3 0 1 1-3-3"/><path d="M14 3c0 3 2.5 5 5 5"/></svg>TikTok</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ GNG STUDIOS ══════════════════════════════ -->
+<div id="page-studios" class="page">
+  <div class="page-hero" style="background:linear-gradient(to right,var(--black) 60%,#1a0000);">
+    <h1>GNG<br><span style="color:var(--red);">Studios</span></h1>
+    <p>A production company offering people of any age and stage the chance to start and grow a music career — studio time, music videos, artist development, mentoring and guidance, built to help up-and-coming creatives find their foundation.</p>
+  </div>
+  <div class="section">
+    <div class="section-head"><h2>Services</h2></div>
+    <div class="studios-services">
+      <div class="studio-svc"><h3>Recording</h3><p>Full studio sessions with a professional engineer, from vocals to full production.</p></div>
+      <div class="studio-svc"><h3>Mixing</h3><p>Stem mixing that balances every element into a mix that translates across systems.</p></div>
+      <div class="studio-svc"><h3>Mastering</h3><p>Loudness-optimised masters ready for streaming, download and vinyl.</p></div>
+      <div class="studio-svc"><h3>Distribution</h3><p>Straight into Repeat UK for release across every major platform.</p></div>
+      <div class="studio-svc"><h3>Artist Development</h3><p>Mentoring and guidance to help you build a real foundation for your career.</p></div>
+      <div class="studio-svc"><h3>Visuals &amp; Photography</h3><p>Music videos, cover art and content that matches the sound.</p></div>
+    </div>
+
+    <div class="section-head"><h2>Clients We've Worked With</h2><span class="tag">Studio &amp; production credits</span></div>
+    <div style="display:flex;flex-wrap:wrap;gap:2px;background:var(--line);border:1px solid var(--line);margin-bottom:56px;">
+      <div style="background:var(--black2);padding:28px 34px;flex:1;min-width:150px;text-align:center;">
+        <div style="font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:.02em;">TKANDZ</div>
+      </div>
+      <div style="background:var(--black2);padding:28px 34px;flex:1;min-width:150px;text-align:center;">
+        <div style="font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:.02em;">XENA</div>
+      </div>
+      <div style="background:var(--black2);padding:28px 34px;flex:1;min-width:150px;text-align:center;">
+        <div style="font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:.02em;">LILCR</div>
+      </div>
+      <div style="background:var(--black2);padding:28px 34px;flex:1;min-width:150px;text-align:center;">
+        <div style="font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:.02em;">BUDZ</div>
+      </div>
+      <div style="background:var(--black2);padding:28px 34px;flex:1;min-width:200px;text-align:center;border-left:2px solid var(--red);">
+        <div style="font-family:'Anton',sans-serif;font-size:1.4rem;text-transform:uppercase;letter-spacing:.02em;">WARNER CHAPPELL</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--red);letter-spacing:.06em;margin-top:5px;">PUBLISHING PARTNER</div>
+      </div>
+    </div>
+
+    <div class="terms-box">
+      <p><strong style="color:var(--white);">Booking policy —</strong> please reschedule or cancel at least 24 hours before your session. Same-day bookings must be confirmed by phone. Sessions between 10PM–6AM carry a 15% late-night rate. We don't offer refunds, only rebooking.</p>
+    </div>
+
+    <div class="booking-cta" style="margin-top:40px;">
+      <h2>Ready to Book?</h2>
+      <a href="https://wa.me/447541272227" target="_blank" class="btn-white">Book on WhatsApp</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ EVENTS ══════════════════════════════ -->
+<div id="page-events" class="page">
+  <div class="page-hero">
+    <h1>GNG<br><span style="color:var(--red);">Events</span></h1>
+    <p>Creating unforgettable experiences that blend excitement, creativity and innovation — sparking joy, connecting people, and giving emerging talent a real platform.</p>
+  </div>
+  <div class="section">
+    <div class="events-note">
+      <p>Whether we're hosting a show or unveiling the latest drop under Grind And Ghost, our goal is to celebrate the energy of right now while setting the stage for what's next. Our events offer a space to have fun, discover new ideas, and see the next big thing in music.</p>
+      <p>With every project, we're building a community of people who share a vision for what's possible when creativity and ambition collide.</p>
+    </div>
+    <div style="margin-top:44px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--red);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px;">Looking to collaborate with an events?</p>
+      <p style="color:var(--off);font-size:.9rem;line-height:1.6;margin-bottom:22px;max-width:520px;"> Send us a message with your details and we'll get back to you soon.</p>
+      <button class="btn-primary" onclick="go('contact')">Get in Touch</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ NO PRESSURE ══════════════════════════════ -->
+<div id="page-nopressure" class="page">
+  <div class="page-hero">
+    <h1>No Pressure<br><span style="color:var(--red);">Entertainment</span></h1>
+    <p>An artist discovery platform dedicated to showcasing musical talent from around the globe.</p>
+  </div>
+  <div class="np-intro section">
+    <p>No Pressure Ent. was created by producer/engineer Cameron 'CD' Dankwa during lockdown in 2020, when he set out to discover musical talent in other countries. It began as a run of freestyles with local artists he already worked with — then, episode by episode, grew into reaching out to artists overseas.</p>
+    <p>The aim has stayed the same since day one: show and educate people on the different cultures music has to offer worldwide, and help each artist we work with find their own path forward. What started as a discovery series has since grown into a running music label.</p>
+    <div class="np-facts">
+      <div class="np-fact"><div class="country">UK</div></div>
+      <div class="np-fact"><div class="country">France</div></div>
+      <div class="np-fact"><div class="country">Italy</div></div>
+      <div class="np-fact"><div class="country">Spain</div></div>
+    </div>
+    <p>That's the ground No Pressure has covered so far, with more territory planned ahead.</p>
+    <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:8px;">
+      <a href="https://www.cdvrswrld.com/" target="_blank" class="btn-primary">Visit No Pressure</a>
+      <button class="btn-outline" onclick="go('contact')">Submit Your Music</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════ CONTACT ══════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <h1>Get in<br><span style="color:var(--red);">Touch</span></h1>
+    <p>Contact us for general enquiries and submissions — artist, partner, press or just a fan, we read everything.</p>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-left">
+      <h2>Let's Talk</h2>
+      <p>Whether you're an artist looking for a home, a brand wanting to partner, or you just want to know more about what we do — the door's open.</p>
+      <a class="email" href="mailto:info@grindandghost.com">info@grindandghost.com</a>
+    </div>
+    <form onsubmit="handleForm(event)">
+      <div class="row">
+        <div class="field"><label for="fn">First name</label><input id="fn" type="text" required></div>
+        <div class="field"><label for="ln">Last name</label><input id="ln" type="text" required></div>
+      </div>
+      <div class="field"><label for="em">Email</label><input id="em" type="email" required></div>
+      <div class="field"><label for="msg">Message</label><textarea id="msg" required></textarea></div>
+      <button type="submit" class="submit-btn">Send</button>
+      <p id="formSuccess" class="form-success" style="display:none;">Thanks for submitting — we'll be in touch.</p>
+    </form>
+  </div>
+
+  <div class="section social-hub" style="padding-top:20px;">
+    <div class="section-head"><h2>Connect With Us</h2></div>
+    <div class="social-groups">
+      <div class="social-group">
+        <div class="social-group-head"><h3>Grind &amp; Ghost</h3><span>Label &amp;</div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/grindandghost/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>Instagram</a>
+          <a href="https://www.youtube.com/@grindandghostrecords/featured" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg>YouTube</a>
+          <a href="https://www.tiktok.com/@grindandghost?lang=en" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3v10.5a3 3 0 1 1-3-3"/><path d="M14 3c0 3 2.5 5 5 5"/></svg>TikTok</a>
+          <a href="https://open.spotify.com/artist/0DGQqQUltmg7eUOd0HeUaS" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M7 10c3-1 8-1 10 1M7.5 13c2.5-.8 6.5-.6 8.5.8M8 16c2-.5 5-.4 6.5.6"/></svg>Spotify</a>
+          <a href="https://uk.linkedin.com/in/ayo-peters-698222203" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 10v7M7 7v.01M12 17v-4.5c0-1.5 1-2.5 2.5-2.5S17 11 17 12.5V17M12 10.5V17"/></svg>LinkedIn</a>
+        </div>
+      </div>
+      <div class="social-group">
+        <div class="social-group-head"><h3>Repeat UK</h3><span>Distribution</span></div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/repeat.uk/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>Instagram</a>
+          <a href="https://www.tiktok.com/@repeat.uk" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M14 3v10.5a3 3 0 1 1-3-3"/><path d="M14 3c0 3 2.5 5 5 5"/></svg>TikTok</a>
+        </div>
+      </div>
+      <div class="social-group">
+        <div class="social-group-head"><h3>No Pressure Entertainment</h3><span>Artist discovery platform</span></div>
+        <div class="social-links">
+          <a href="https://www.cdvrswrld.com/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.5 2.5 15.5 0 18M12 3c-2.5 2.5-2.5 15.5 0 18"/></svg>www.cdvrswrld.com</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="site-footer" style="display:none;">
+  <div class="f-logo">GRIND<span>AND</span>GHOST</div>
+  <p>© Copyright 2026 Grind and Ghost Ltd. All rights reserved.</p>
+  <p>Company No. 15824941 · Registered in England &amp; Wales</p>
+</footer>
+
+<script>
+  const pages = ['home','artists','releases','about','podcast','repeat','studios','events','nopressure','contact'];
+
+  function go(id){
+    pages.forEach(p=>{
+      const el = document.getElementById('page-'+p);
+      if(el) el.classList.toggle('active', p===id);
+    });
+    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+    document.getElementById('site-footer').style.display = 'flex';
+    window.scrollTo({top:0,behavior:'instant'});
+    document.getElementById('nav').classList.remove('open');
+    history.pushState(null,'','#'+id);
+    initReveal();
+  }
+
+  window.addEventListener('load',()=>{
+    const hash = location.hash.replace('#','');
+    if(hash && pages.includes(hash)) go(hash);
+    else document.getElementById('site-footer').style.display='flex';
+    initReveal();
+  });
+
+  document.getElementById('burger').addEventListener('click',()=>{
+    document.getElementById('nav').classList.toggle('open');
+  });
+
+  const releaseSearch = document.getElementById('releaseSearch');
+  const clearReleaseSearch = document.getElementById('clearReleaseSearch');
+  const releaseSearchStatus = document.getElementById('releaseSearchStatus');
+  const releaseSearchEmpty = document.getElementById('releaseSearchEmpty');
+  const releaseCards = document.querySelectorAll('#page-releases .releases-grid .r-card');
+
+  function filterReleases(){
+    const query = releaseSearch.value.trim().toLowerCase();
+    let visibleCount = 0;
+    releaseCards.forEach(card=>{
+      const artist = card.querySelector('.artist')?.textContent.toLowerCase() || '';
+      const title = card.querySelector('.title')?.textContent.toLowerCase() || '';
+      const matches = !query || artist.includes(query) || title.includes(query);
+      card.hidden = !matches;
+      if(matches) visibleCount++;
+    });
+    releaseSearchStatus.textContent = query ? `${visibleCount} release${visibleCount === 1 ? '' : 's'} found` : `${visibleCount} releases`;
+    releaseSearchEmpty.classList.toggle('visible', visibleCount === 0);
+  }
+
+  releaseSearch.addEventListener('input', filterReleases);
+  clearReleaseSearch.addEventListener('click',()=>{
+    releaseSearch.value = '';
+    releaseSearch.focus();
+    filterReleases();
+  });
+  filterReleases();
+
+  function toggleFaq(btn){
+    const answer = btn.nextElementSibling;
+    const icon = btn.querySelector('.icon');
+    const isOpen = answer.classList.toggle('open');
+    icon.textContent = isOpen ? '−' : '+';
+  }
+
+  function handleForm(e){
+    e.preventDefault();
+    e.target.reset();
+    document.getElementById('formSuccess').style.display='block';
+    setTimeout(()=>{document.getElementById('formSuccess').style.display='none';},6000);
+  }
+
+  let revealObserver;
+  function initReveal(){
+    if(revealObserver) revealObserver.disconnect();
+    revealObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{ if(en.isIntersecting){ en.target.classList.add('in'); revealObserver.unobserve(en.target); } });
+    },{threshold:.12});
+    document.querySelectorAll('.page.active .reveal').forEach(el=>revealObserver.observe(el));
+  }
+</script>
+</body>
+</html>
