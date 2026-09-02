@@ -1274,7 +1274,7 @@ footer .f-logo span{color:var(--red);}
   window.addEventListener('load',()=>{
     const hash = location.hash.replace('#','');
     const path = location.pathname.replace(/^\/+|\/+$/g,'');
-    const initialPage = hash && pages.includes(hash) ? hash : pages.includes(path) ? path : 'home';
+    const initialPage = hash && pages.includes(hash) ? hash : path === 'contact-us' ? 'contact' : pages.includes(path) ? path : 'home';
     go(initialPage);
     const submitted = sessionStorage.getItem('formSubmitted') || new URLSearchParams(location.search).has('submitted');
     if(submitted){
