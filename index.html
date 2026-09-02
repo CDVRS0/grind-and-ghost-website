@@ -374,16 +374,16 @@ footer .f-logo span{color:var(--red);}
   <div class="logo" onclick="go('home')">GRIND<span>AND</span>GHOST</div>
   <button class="burger" id="burger">MENU</button>
   <nav id="nav">
-    <a onclick="go('home')">Home</a>
-    <a onclick="go('artists')">Artists</a>
-    <a onclick="go('releases')">Releases</a>
-    <a onclick="go('about')">About</a>
-    <a onclick="go('podcast')">Podcast</a>
-    <a onclick="go('repeat')">Repeat UK</a>
-    <a onclick="go('studios')">Studios</a>
-    <a onclick="go('events')">Events</a>
-    <a onclick="go('nopressure')">No Pressure</a>
-    <a onclick="go('contact')" class="nav-cta">Contact</a>
+    <a href="/" onclick="go('home');return false;">Home</a>
+    <a href="/artists" onclick="go('artists');return false;">Artists</a>
+    <a href="/releases" onclick="go('releases');return false;">Releases</a>
+    <a href="/about" onclick="go('about');return false;">About</a>
+    <a href="/podcast" onclick="go('podcast');return false;">Podcast</a>
+    <a href="/repeat" onclick="go('repeat');return false;">Repeat UK</a>
+    <a href="/studios" onclick="go('studios');return false;">Studios</a>
+    <a href="/events" onclick="go('events');return false;">Events</a>
+    <a href="/nopressure" onclick="go('nopressure');return false;">No Pressure</a>
+    <a href="/contact" onclick="go('contact');return false;" class="nav-cta">Contact</a>
   </nav>
 </header>
 
@@ -1243,6 +1243,18 @@ footer .f-logo span{color:var(--red);}
 
 <script>
   const pages = ['home','artists','releases','about','podcast','repeat','studios','events','nopressure','contact'];
+  const pageSeo = {
+    home: ['Grind And Ghost Records', 'Grind And Ghost Records — independent label, studios, distribution and events.'],
+    artists: ['Artists | Grind And Ghost Records', 'Meet the artists building the sound of Grind And Ghost, one release at a time.'],
+    releases: ['Releases | Grind And Ghost Records', 'Explore music released through Grind And Ghost Records and Repeat UK.'],
+    about: ['About | Grind And Ghost Records', 'Learn about Grind And Ghost Records, our team, mission and creative community.'],
+    podcast: ['Podcast | Grind And Ghost Records', 'Listen to Grind And Ghost podcast episodes featuring artists, executives and music industry creatives.'],
+    repeat: ['Repeat UK | Grind And Ghost Records', 'Distribute independent music worldwide with Repeat UK, the distribution arm of Grind And Ghost.'],
+    studios: ['GNG Studios | Grind And Ghost Records', 'Book recording, mixing, mastering, artist development and visual production at GNG Studios.'],
+    events: ['Events | Grind And Ghost Records', 'Discover Grind And Ghost showcases, live events and creative experiences.'],
+    nopressure: ['No Pressure Entertainment | Grind And Ghost Records', 'Discover musical talent from around the globe with No Pressure Entertainment.'],
+    contact: ['Contact | Grind And Ghost Records', 'Contact Grind And Ghost Records for artist submissions, partnerships, press and general enquiries.']
+  };
 
   function go(id){
     pages.forEach(p=>{
@@ -1253,14 +1265,17 @@ footer .f-logo span{color:var(--red);}
     document.getElementById('site-footer').style.display = 'flex';
     window.scrollTo({top:0,behavior:'instant'});
     document.getElementById('nav').classList.remove('open');
+    document.title = pageSeo[id][0];
+    document.querySelector('meta[name="description"]').setAttribute('content', pageSeo[id][1]);
     history.pushState(null,'','#'+id);
     initReveal();
   }
 
   window.addEventListener('load',()=>{
     const hash = location.hash.replace('#','');
-    if(hash && pages.includes(hash)) go(hash);
-    else document.getElementById('site-footer').style.display='flex';
+    const path = location.pathname.replace(/^\/+|\/+$/g,'');
+    const initialPage = hash && pages.includes(hash) ? hash : pages.includes(path) ? path : 'home';
+    go(initialPage);
     const submitted = sessionStorage.getItem('formSubmitted') || new URLSearchParams(location.search).has('submitted');
     if(submitted){
       const success = document.getElementById('formSuccess');
