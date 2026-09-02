@@ -1188,10 +1188,10 @@ footer .f-logo span{color:var(--red);}
       <p>Whether you're an artist looking for a home, a brand wanting to partner, or you just want to know more about what we do — the door's open.</p>
       <a class="email" href="mailto:info@grindandghost.com">info@grindandghost.com</a>
     </div>
-    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST" onsubmit="handleForm(event)">
+    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST">
       <input type="hidden" name="_subject" value="New Grind And Ghost website enquiry">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://grind-and-ghost-website.vercel.app/?submitted=1#contact">
       <input type="hidden" name="_autoresponse" value="Thanks for contacting Grind And Ghost. We have received your message and will be in touch soon.">
       <div class="row">
         <div class="field"><label for="fn">First name</label><input id="fn" name="first_name" type="text" required></div>
@@ -1261,6 +1261,11 @@ footer .f-logo span{color:var(--red);}
     const hash = location.hash.replace('#','');
     if(hash && pages.includes(hash)) go(hash);
     else document.getElementById('site-footer').style.display='flex';
+    if(new URLSearchParams(location.search).has('submitted')){
+      const success = document.getElementById('formSuccess');
+      success.textContent = "Thanks for submitting — we'll be in touch.";
+      success.style.display = 'block';
+    }
     initReveal();
   });
 
@@ -1295,34 +1300,6 @@ footer .f-logo span{color:var(--red);}
     filterReleases();
   });
   filterReleases();
-
-  async function handleForm(e){
-    e.preventDefault();
-    const form = e.target;
-    const success = document.getElementById('formSuccess');
-    const submit = form.querySelector('.submit-btn');
-    submit.disabled = true;
-    submit.textContent = 'Sending...';
-    success.style.display = 'none';
-
-    try{
-      const response = await fetch(form.action, {
-        method:'POST',
-        body:new FormData(form),
-        headers:{Accept:'application/json'}
-      });
-      if(!response.ok) throw new Error('Submission failed');
-      form.reset();
-      success.textContent = "Thanks for submitting — we'll be in touch.";
-      success.style.display = 'block';
-    }catch(error){
-      success.textContent = 'Something went wrong. Please email info@grindandghost.com directly.';
-      success.style.display = 'block';
-    }finally{
-      submit.disabled = false;
-      submit.textContent = 'Send';
-    }
-  }
 
   function toggleFaq(btn){
     const answer = btn.nextElementSibling;
