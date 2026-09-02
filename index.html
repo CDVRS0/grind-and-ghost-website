@@ -1267,7 +1267,7 @@ footer .f-logo span{color:var(--red);}
     document.getElementById('nav').classList.remove('open');
     document.title = pageSeo[id][0];
     document.querySelector('meta[name="description"]').setAttribute('content', pageSeo[id][1]);
-    history.pushState(null,'','#'+id);
+    history.pushState(null,'',id === 'home' ? '/' : `/${id}`);
     initReveal();
   }
 
