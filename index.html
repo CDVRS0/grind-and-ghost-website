@@ -1188,10 +1188,10 @@ footer .f-logo span{color:var(--red);}
       <p>Whether you're an artist looking for a home, a brand wanting to partner, or you just want to know more about what we do — the door's open.</p>
       <a class="email" href="mailto:info@grindandghost.com">info@grindandghost.com</a>
     </div>
-    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST">
+    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST" onsubmit="sessionStorage.setItem('formSubmitted','1')">
       <input type="hidden" name="_subject" value="New Grind And Ghost website enquiry">
       <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://grind-and-ghost-website.vercel.app/?submitted=1#contact">
+      <input type="hidden" name="_next" value="https://grind-and-ghost-website.vercel.app/#contact">
       <input type="hidden" name="_autoresponse" value="Thanks for contacting Grind And Ghost. We have received your message and will be in touch soon.">
       <div class="row">
         <div class="field"><label for="fn">First name</label><input id="fn" name="first_name" type="text" required></div>
@@ -1261,10 +1261,13 @@ footer .f-logo span{color:var(--red);}
     const hash = location.hash.replace('#','');
     if(hash && pages.includes(hash)) go(hash);
     else document.getElementById('site-footer').style.display='flex';
-    if(new URLSearchParams(location.search).has('submitted')){
+    const submitted = sessionStorage.getItem('formSubmitted') || new URLSearchParams(location.search).has('submitted');
+    if(submitted){
       const success = document.getElementById('formSuccess');
       success.textContent = "Thanks for submitting — we'll be in touch.";
       success.style.display = 'block';
+      sessionStorage.removeItem('formSubmitted');
+      if(location.search) history.replaceState(null,'',location.pathname + location.hash);
     }
     initReveal();
   });
