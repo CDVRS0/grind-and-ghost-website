@@ -197,7 +197,8 @@ nav a:hover::after,nav a.active::after{width:100%;}
 .badge{position:absolute;top:12px;right:12px;background:var(--red);color:var(--white);font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.08em;padding:3px 8px;}
 
 /* ── SERVICES ── */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--line);}
+.services-grid{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);}
+.services-grid .svc{flex:1 1 250px;}
 .svc{background:var(--black2);padding:34px 26px;cursor:pointer;border-left:2px solid transparent;transition:.3s;}
 .svc:hover{background:var(--black3);border-color:var(--red);}
 .svc h3{font-family:'Anton',sans-serif;font-weight:400;font-size:1.3rem;text-transform:uppercase;margin-bottom:10px;}
@@ -285,7 +286,8 @@ nav a:hover::after,nav a.active::after{width:100%;}
 .faq-a.open{max-height:300px;padding-bottom:18px;}
 
 /* ── GNG STUDIOS ── */
-.studios-services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--line);margin-bottom:56px;}
+.studios-services{display:flex;flex-wrap:wrap;gap:1px;background:var(--line);margin-bottom:56px;}
+.studios-services .studio-svc{flex:1 1 220px;}
 .studio-svc{background:var(--black2);padding:30px 24px;border-left:2px solid transparent;transition:.25s;}
 .studio-svc:hover{border-color:var(--red);background:var(--black3);}
 .studio-svc h3{font-family:'Anton',sans-serif;font-weight:400;font-size:1.1rem;text-transform:uppercase;margin-bottom:8px;}
@@ -1186,10 +1188,11 @@ footer .f-logo span{color:var(--red);}
       <p>Whether you're an artist looking for a home, a brand wanting to partner, or you just want to know more about what we do — the door's open.</p>
       <a class="email" href="mailto:info@grindandghost.com">info@grindandghost.com</a>
     </div>
-    <form action="https://formsubmit.co/info@grindandghost.com" method="POST" onsubmit="handleForm(event)">
+    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST" onsubmit="handleForm(event)">
       <input type="hidden" name="_subject" value="New Grind And Ghost website enquiry">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_autoresponse" value="Thanks for contacting Grind And Ghost. We have received your message and will be in touch soon.">
       <div class="row">
         <div class="field"><label for="fn">First name</label><input id="fn" name="first_name" type="text" required></div>
         <div class="field"><label for="ln">Last name</label><input id="ln" name="last_name" type="text" required></div>
