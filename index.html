@@ -385,7 +385,7 @@ footer .f-logo span{color:var(--red);}
 
   <div class="hero">
     <div class="hero-video-wrap">
-      <video class="hero-video-frame" src="Images%20/0902.mp4"
+      <video id="heroVideo" class="hero-video-frame" src="Images%20/0902.mp4"
         autoplay muted loop playsinline preload="auto"
         aria-label="Grind and Ghost background video"></video>
     </div>
@@ -1248,6 +1248,18 @@ footer .f-logo span{color:var(--red);}
     contact: ['Contact | Grind And Ghost Records', 'Contact Grind And Ghost Records for artist submissions, partnerships, press and general enquiries.']
   };
 
+  const heroVideo = document.getElementById('heroVideo');
+  function startHeroVideo(){
+    if(!heroVideo || document.hidden) return;
+    heroVideo.muted = true;
+    heroVideo.defaultMuted = true;
+    const playback = heroVideo.play();
+    if(playback) playback.catch(()=>{});
+  }
+  ['loadeddata','canplay'].forEach(eventName=>heroVideo?.addEventListener(eventName,startHeroVideo));
+  document.addEventListener('visibilitychange',startHeroVideo);
+  window.addEventListener('pageshow',startHeroVideo);
+
   function go(id){
     pages.forEach(p=>{
       const el = document.getElementById('page-'+p);
@@ -1277,6 +1289,7 @@ footer .f-logo span{color:var(--red);}
       if(location.search) history.replaceState(null,'',location.pathname + location.hash);
     }
     initReveal();
+    startHeroVideo();
   });
 
   document.getElementById('burger').addEventListener('click',()=>{
