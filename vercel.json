@@ -1,14 +1,72 @@
 {
   "rewrites": [
-    { "source": "/about", "destination": "/index.html" },
-    { "source": "/artists", "destination": "/index.html" },
-    { "source": "/releases", "destination": "/index.html" },
-    { "source": "/podcast", "destination": "/index.html" },
-    { "source": "/repeat", "destination": "/index.html" },
-    { "source": "/studios", "destination": "/index.html" },
-    { "source": "/events", "destination": "/index.html" },
-    { "source": "/nopressure", "destination": "/index.html" },
-    { "source": "/contact", "destination": "/index.html" },
-    { "source": "/contact-us", "destination": "/index.html" }
+    {
+      "source": "/about",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/artists",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/releases",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/podcast",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/repeat",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/studios",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/events",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/nopressure",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/contact-us",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/achievements",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
   ]
 }

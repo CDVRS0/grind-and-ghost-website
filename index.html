@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Grind And Ghost </title>
+<title>Grind And Ghost — Independent Music & Culture</title>
 <link rel="canonical" href="https://www.grindandghost.com/">
 <meta property="og:url" content="https://www.grindandghost.com/">
 <meta property="og:title" content="Grind And Ghost Records">
 <meta property="og:site_name" content="Grind And Ghost Records">
 <meta name="description" content="Grind And Ghost Records — independent label, studios, distribution and events.">
 <link rel="icon" type="image/png" href="Images%20/GhostNGrind%20F2-11%20-%20Transparent.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/video/welcome-poster.jpg">
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Spectral:ital,wght@0,400;1,400&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -358,18 +361,21 @@ footer .f-logo span{color:var(--red);}
   .release-search .field{max-width:none;}
 }
 </style>
+<link rel="stylesheet" href="revamp.css">
 </head>
 <body>
 
-<div class="grain"></div>
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="grain" aria-hidden="true"></div>
 
 <header>
-  <div class="logo" onclick="go('home')">GRIND<span>AND</span>GHOST</div>
-  <button class="burger" id="burger">MENU</button>
-  <nav id="nav">
+  <a class="logo" href="/" onclick="go('home');return false;" aria-label="Grind and Ghost home">GRIND<span>AND</span>GHOST<span class="logo-dot">®</span></a>
+  <button class="burger" id="burger" aria-controls="nav" aria-expanded="false">MENU <span aria-hidden="true">☰</span></button>
+  <nav id="nav" aria-label="Main navigation">
     <a href="/" onclick="go('home');return false;">Home</a>
     <a href="/artists" onclick="go('artists');return false;">Artists</a>
     <a href="/releases" onclick="go('releases');return false;">Releases</a>
+    <a href="/achievements" onclick="go('achievements');return false;">Achievements</a>
     <a href="/about" onclick="go('about');return false;">About</a>
     <a href="/podcast" onclick="go('podcast');return false;">Podcast</a>
     <a href="/repeat" onclick="go('repeat');return false;">Repeat UK</a>
@@ -380,23 +386,27 @@ footer .f-logo span{color:var(--red);}
   </nav>
 </header>
 
+<main id="main-content" tabindex="-1">
 <!-- ══════════════════════════════ HOME ══════════════════════════════ -->
 <div id="page-home" class="page active">
 
-  <div class="hero">
-    <div class="hero-video-wrap">
-      <video id="heroVideo" class="hero-video-frame" src="Images%20/0902.mp4"
-        autoplay muted loop playsinline preload="auto"
-        aria-label="Grind and Ghost background video"></video>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-video-wrap" aria-hidden="true">
+      <video id="heroVideo" class="hero-video-frame" autoplay muted loop playsinline webkit-playsinline preload="auto" poster="assets/video/welcome-poster.jpg" tabindex="-1">
+        <source src="assets/video/welcome-mobile.mp4" type="video/mp4" media="(max-width: 767px)">
+        <source src="assets/video/welcome-desktop.mp4" type="video/mp4">
+      </video>
     </div>
-    <div class="hero-overlay"></div>
-    <img class="hero-logo" src="Images%20/GhostNGrind%20F2-11%20-%20Transparent.png" alt="Grind and Ghost">
-    <p class="hero-sub">An independent record label building artists, music and culture on their own terms.</p>
-    <div class="hero-btns">
-      <button class="btn-primary" onclick="go('artists')">Our Artists</button>
-      <button class="btn-outline" onclick="go('studios')">Book a Session</button>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-topline"><span class="eyebrow"><i></i> INDEPENDENT BY NATURE</span><span class="hero-location">UK ROOTS. GLOBAL VISION.</span></div>
+    <div class="hero-copy">
+      <p class="eyebrow hero-label">GRIND AND GHOST RECORDS</p>
+      <h1 id="hero-title">MAKE MUSIC.<br>BUILD <span class="outline-text">CULTURE.</span></h1>
+      <p class="hero-sub">An independent record label building artists, music and culture on their own terms.</p>
+      <div class="hero-btns"><a class="btn-primary" href="/artists" onclick="go('artists');return false;">Meet the artists <span aria-hidden="true">↗</span></a><a class="btn-outline" href="/studios" onclick="go('studios');return false;">Book the studio <span aria-hidden="true">↗</span></a></div>
     </div>
-  </div>
+    <div class="hero-bottom"><a href="/achievements" onclick="go('achievements');return false;" class="hero-proof"><strong>3.2M</strong><span>SPOTIFY STREAMS<br>HOLD ON · OFFICIAL BUDZ &amp; SK1TZ</span><span aria-hidden="true">↗</span></a><button id="videoToggle" class="video-toggle" type="button" aria-label="Pause background video">Pause film <span aria-hidden="true">Ⅱ</span></button></div>
+  </section>
 
   <div class="marquee-wrap">
     <div class="marquee">
@@ -405,49 +415,64 @@ footer .f-logo span{color:var(--red);}
     </div>
   </div>
 
+
+  <section class="section impact-section" aria-labelledby="impact-title">
+    <div class="section-head"><div><p class="eyebrow">THE SOUND. THE REACH. THE IMPACT.</p><h2 id="impact-title">Independent music.<br><span class="outline-text">Real milestones.</span></h2></div><a class="text-link" href="/achievements" onclick="go('achievements');return false;">Explore achievements ↗</a></div>
+    <div class="impact-grid">
+      <article><span class="stat-index">01 / SPOTIFY</span><strong>3.2<span>M</span></strong><h3>Hold On</h3><p>Official Budz &amp; SK1TZ</p></article>
+      <article><span class="stat-index">02 / ALL PLATFORMS</span><strong>600<span>K</span></strong><h3>All Night</h3><p>Mizzofficial</p></article>
+      <article><span class="stat-index">03 / ALL PLATFORMS</span><strong>300<span>K</span></strong><h3>If I Told You</h3><p>Mizzofficial &amp; Teejay</p></article>
+      <article class="impact-final"><span class="stat-index">04 / SPOTIFY</span><strong>3<span> × 100K</span></strong><h3>More moments that matter</h3><p>Red Flag · It’s Us · Silent Mode</p></article>
+    </div><p class="source-note">Recorded stream milestones from our plaques. Individual release figures, across the platforms shown; these are historical milestones, not live totals.</p>
+  </section>
+  <section class="section muso-section" aria-labelledby="muso-title">
+    <div class="muso-rank"><p class="eyebrow">RECOGNISED ON MUSO.AI</p><h2 id="muso-title">TOP <span>2%</span></h2><p>of Labels · Week of 15–22 October 2026</p></div>
+    <div class="muso-detail"><p class="muso-wordmark">Muso.AI <span>↗</span></p><h3>The credits behind the culture.</h3><p>Explore Grind And Ghost Records’ claimed label profile, music credits and creative connections.</p><div class="muso-numbers"><div><strong>118</strong><span>Label credits</span></div><div><strong>41</strong><span>Artists released with</span></div></div><a class="text-link" href="https://muso.ai/profile/941ac807-73e2-4c9c-a264-f2de06fcecdf" target="_blank" rel="noopener noreferrer">View our Muso.AI profile ↗</a><p class="source-note">Public profile checked 28 October 2026. Rankings and credits may change.</p></div>
+  </section>
+
   <!-- RELEASES PREVIEW -->
   <div class="section reveal">
     <div class="section-head">
       <h2>Latest Releases</h2>
-      <span class="tag" style="cursor:pointer;color:var(--red);" onclick="go('releases')">View all →</span>
+      <a class="text-link" href="/releases" onclick="go('releases');return false;">View all releases ↗</a>
     </div>
     <div class="releases-grid latest-releases-grid">
       <div class="r-card">
-        <img src="Images /DMULLS.jpeg" alt="DMULLS"">
+        <img loading="lazy" decoding="async" src="assets/images/dmulls.webp" alt="DMULLS">
          <span class="badge">Out Now</span>
         <div class="r-info"><span class="artist">Dearra Mulls</span><span class="title">CRB</span></div>
       </div>
       <div class="r-card">
-        <img src="Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - SOUTHBOUND">
+        <img loading="lazy" decoding="async" src="assets/images/southbound-cover-art.webp" alt="CDVRS - SOUTHBOUND">
          <span class="badge">Out Now</span>
         <div class="r-info"><span class="artist">CDVRS</span><span class="title">SOUTHBOUND</span></div>
       </div>
       <div class="r-card">
-        <img src="Images /PEACE_VS_ CHAOS.png" alt="CDVRS - PEACE VS CHAOS">
+        <img loading="lazy" decoding="async" src="assets/images/peace-vs-chaos.webp" alt="CDVRS - PEACE VS CHAOS">
         <div class="r-info"><span class="artist">CDVRS</span><span class="title">PEACE VS CHAOS</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_d2923ff22c974ed7b32b780286e2e3c5~mv2.jpg" alt="Havana - Love Havana EP"> 
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_d2923ff22c974ed7b32b780286e2e3c5~mv2.jpg" alt="Havana - Love Havana EP">
         <div class="r-info"><span class="artist">Havana</span><span class="title">Love Havana (EP)</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_7c61aa3bfbd144419d035ca2f19e7826~mv2.jpg" alt="SAINTAIR - Sell Me Your Sunshine">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_7c61aa3bfbd144419d035ca2f19e7826~mv2.jpg" alt="SAINTAIR - Sell Me Your Sunshine">
         <div class="r-info"><span class="artist">SAINTAIR</span><span class="title">Sell Me Your Sunshine</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_87e1a03a274740d29d9d958937e986d7~mv2.jpg" alt="Havana - Wondering">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_87e1a03a274740d29d9d958937e986d7~mv2.jpg" alt="Havana - Wondering">
         <div class="r-info"><span class="artist">Havana</span><span class="title">Wondering</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_7ccad37628ee4de1a29ada52da807a7f~mv2.jpg" alt="No Pressure, LilCR - Like What">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_7ccad37628ee4de1a29ada52da807a7f~mv2.jpg" alt="No Pressure, LilCR - Like What">
         <div class="r-info"><span class="artist">No Pressure &amp; LilCR</span><span class="title">Like What</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_4cae421cd06b4369b6131d1e48c30961~mv2.jpg" alt="Palmzz - Hoe">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_4cae421cd06b4369b6131d1e48c30961~mv2.jpg" alt="Palmzz - Hoe">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Hoe</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_c8d96eed6a75495cbfdb6a099d508cf4~mv2.png" alt="Marlz - Coulda Been Us">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_c8d96eed6a75495cbfdb6a099d508cf4~mv2.png" alt="Marlz - Coulda Been Us">
         <div class="r-info"><span class="artist">Marlz</span><span class="title">Coulda Been Us</span></div>
       </div>
     </div>
@@ -460,27 +485,27 @@ footer .f-logo span{color:var(--red);}
       <span class="tag">Grind And Ghost</span>
     </div>
     <div class="services-grid">
-      <div class="svc" onclick="go('studios')">
+      <div class="svc" tabindex="0" role="link" onclick="go('studios')">
         <h3>GNG Studios</h3>
         <p>Recording, mixing, mastering, artist development and visual production, for any age group at any stage of their career.</p>
         <div class="go">Book a session →</div>
       </div>
-      <div class="svc" onclick="go('repeat')">
+      <div class="svc" tabindex="0" role="link" onclick="go('repeat')">
         <h3>Repeat UK</h3>
         <p>Our distribution arm, getting independent music onto every major platform worldwide.</p>
         <div class="go">Start distributing →</div>
       </div>
-      <div class="svc" onclick="go('events')">
+      <div class="svc" tabindex="0" role="link" onclick="go('events')">
         <h3>GNG Events</h3>
         <p>Live shows, parties and experiences that put our artists in front of real audiences.</p>
         <div class="go">See events →</div>
       </div>
-      <div class="svc" onclick="go('nopressure')">
+      <div class="svc" tabindex="0" role="link" onclick="go('nopressure')">
         <h3>No Pressure</h3>
         <p>An artist discovery platform finding and elevating talent from around the world.</p>
         <div class="go">Meet the roster →</div>
       </div>
-      <div class="svc" onclick="go('podcast')">
+      <div class="svc" tabindex="0" role="link" onclick="go('podcast')">
         <h3>GNG Podcast</h3>
         <p>In-depth interviews with the voices shaping the culture and business of music.</p>
         <div class="go">Listen now →</div>
@@ -546,7 +571,7 @@ footer .f-logo span{color:var(--red);}
   <div class="section">
     <div class="artist-bios">
       <div class="artist-bio">
-        <div class="avatar"><img src="Images%20/CDVRS.JPG" alt="CDVRS"></div>
+        <div class="avatar"><img loading="lazy" decoding="async" src="assets/images/cdvrs.webp" alt="CDVRS"></div>
         <div>
           <h2>CDVRS</h2>
           <div class="genre">Producer &amp; Engineer</div>
@@ -560,7 +585,7 @@ footer .f-logo span{color:var(--red);}
         </div>
       </div>
       <div class="artist-bio">
-        <div class="avatar"><img src="https://static.wixstatic.com/media/d47fe6_bf6500ea6e034bfa80d9725136d5be0f~mv2.jpg" alt="Havana"></div>
+        <div class="avatar"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_bf6500ea6e034bfa80d9725136d5be0f~mv2.jpg" alt="Havana"></div>
         <div>
           <h2>Havana</h2>
           <div class="genre">Alternative R&amp;B</div>
@@ -574,7 +599,7 @@ footer .f-logo span{color:var(--red);}
         </div>
       </div>
       <div class="artist-bio">
-        <div class="avatar"><img src="https://static.wixstatic.com/media/d47fe6_7981cbf50643439580890d826deadb02~mv2.jpg" alt="Palmzz"></div>
+        <div class="avatar"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_7981cbf50643439580890d826deadb02~mv2.jpg" alt="Palmzz"></div>
         <div>
           <h2>Palmzz</h2>
           <div class="genre">UK Rap</div>
@@ -587,7 +612,7 @@ footer .f-logo span{color:var(--red);}
         </div>
       </div>
       <div class="artist-bio">
-        <div class="avatar"><img src="https://static.wixstatic.com/media/d47fe6_d04edb1b49774a1487116ff09b71d0df~mv2.jpg" alt="Noaah"></div>
+        <div class="avatar"><img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_d04edb1b49774a1487116ff09b71d0df~mv2.jpg" alt="Noaah"></div>
         <div>
           <h2>Noaah</h2>
           <div class="genre">R&amp;B / Pop</div>
@@ -619,187 +644,187 @@ footer .f-logo span{color:var(--red);}
     <p id="releaseSearchStatus" class="release-search-status" aria-live="polite"></p>
     <div class="releases-grid">
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_d2923ff22c974ed7b32b780286e2e3c5~mv2.jpg" alt="Havana - Love Havana EP">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_d2923ff22c974ed7b32b780286e2e3c5~mv2.jpg" alt="Havana - Love Havana EP">
         <div class="r-info"><span class="artist">Havana</span><span class="title">Love Havana (EP)</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_7c61aa3bfbd144419d035ca2f19e7826~mv2.jpg" alt="SAINTAIR - Sell Me Your Sunshine">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_7c61aa3bfbd144419d035ca2f19e7826~mv2.jpg" alt="SAINTAIR - Sell Me Your Sunshine">
         <div class="r-info"><span class="artist">SAINTAIR</span><span class="title">Sell Me Your Sunshine</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_87e1a03a274740d29d9d958937e986d7~mv2.jpg" alt="Havana - Wondering">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_87e1a03a274740d29d9d958937e986d7~mv2.jpg" alt="Havana - Wondering">
         <div class="r-info"><span class="artist">Havana</span><span class="title">Wondering</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_7ccad37628ee4de1a29ada52da807a7f~mv2.jpg" alt="No Pressure, LilCR - Like What">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_7ccad37628ee4de1a29ada52da807a7f~mv2.jpg" alt="No Pressure, LilCR - Like What">
         <div class="r-info"><span class="artist">No Pressure &amp; LilCR</span><span class="title">Like What</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_4cae421cd06b4369b6131d1e48c30961~mv2.jpg" alt="Palmzz - Hoe">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_4cae421cd06b4369b6131d1e48c30961~mv2.jpg" alt="Palmzz - Hoe">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Hoe</span></div>
       </div>
       <div class="r-card">
-        <img src="https://static.wixstatic.com/media/d47fe6_c8d96eed6a75495cbfdb6a099d508cf4~mv2.png" alt="Marlz - Coulda Been Us">
+        <img loading="lazy" decoding="async" src="https://static.wixstatic.com/media/d47fe6_c8d96eed6a75495cbfdb6a099d508cf4~mv2.png" alt="Marlz - Coulda Been Us">
         <div class="r-info"><span class="artist">Marlz</span><span class="title">Coulda Been Us</span></div>
       </div>
       <a class="r-card" href="https://ffm.to/8dxd248" target="_blank" rel="noopener">
-        <img src="Images /LUCKY.jpeg" alt="SoLore - LUCKY$TARZ">
+        <img loading="lazy" decoding="async" src="assets/images/lucky.webp" alt="SoLore - LUCKY$TARZ">
         <div class="r-info"><span class="artist">SoLore</span><span class="title">LUCKY$TARZ</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=ttB4kMAkF6I" target="_blank" rel="noopener">
-        <img src="Images /Body_Litefeet.jpg" alt="wspkartel - Body Litefeet">
+        <img loading="lazy" decoding="async" src="assets/images/body-litefeet.webp" alt="wspkartel - Body Litefeet">
         <div class="r-info"><span class="artist">wspkartel</span><span class="title">Body Litefeet</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=-QPo3XJRsmM" target="_blank" rel="noopener">
-        <img src="Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - BAKE">
+        <img loading="lazy" decoding="async" src="assets/images/southbound-cover-art.webp" alt="CDVRS - BAKE">
         <div class="r-info"><span class="artist">CDVRS</span><span class="title">BAKE</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=TC-XBI7aqm0" target="_blank" rel="noopener">
-        <img src="/Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - SOUTHBOUND">
+        <img loading="lazy" decoding="async" src="/Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - SOUTHBOUND">
         <div class="r-info"><span class="artist">CDVRS</span><span class="title">SOUTHBOUND</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=UAF0eF-xTvo" target="_blank" rel="noopener">
-        <img src="Images /SOUTHBOUND COVER ART.JPG" alt="CDVRS - REFLECT">
+        <img loading="lazy" decoding="async" src="assets/images/southbound-cover-art.webp" alt="CDVRS - REFLECT">
         <div class="r-info"><span class="artist">CDVRS</span><span class="title">REFLECT</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=FzxCkDV_iBc" target="_blank" rel="noopener">
-        <img src="Images /CHLOE.jpeg" alt="Chloe May">
+        <img loading="lazy" decoding="async" src="assets/images/chloe.webp" alt="Chloe May">
         <div class="r-info"><span class="artist">Chloe May</span><span class="title">The Beginning of Chloe May</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=_l9l0o05L94" target="_blank" rel="noopener">
-        <img src="Images /TWISTT.jpeg" alt="Twistt - SHINE">
+        <img loading="lazy" decoding="async" src="assets/images/twistt.webp" alt="Twistt - SHINE">
         <div class="r-info"><span class="artist">Twistt</span><span class="title">SHINE</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=ZS8SCw09K9w" target="_blank" rel="noopener">
-        <img src="Images /PEACE_VS_ CHAOS.png" alt="CDVRS - Peace VS Chaos">
+        <img loading="lazy" decoding="async" src="assets/images/peace-vs-chaos.webp" alt="CDVRS - Peace VS Chaos">
         <div class="r-info"><span class="artist">CDVRS</span><span class="title">PEACE VS CHAOS</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=2wVzSHLqcZo" target="_blank" rel="noopener">
-        <img src="Images /SAINTAIR__Sell Me...__3000x3000@72dpi.jpg" alt="Saintair - Sell Me Your Sunshine">
+        <img loading="lazy" decoding="async" src="assets/images/saintair-sell-me-3000x3000-72dpi.webp" alt="Saintair - Sell Me Your Sunshine">
         <div class="r-info"><span class="artist">Saintair</span><span class="title">Sell Me Your Sunshine</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=VLI0Nil7-50" target="_blank" rel="noopener">
-        <img src="Images /DRUNK.jpg" alt="LeeLee XI - Drunk Dial">
+        <img loading="lazy" decoding="async" src="assets/images/drunk.webp" alt="LeeLee XI - Drunk Dial">
         <div class="r-info"><span class="artist">LeeLee XI</span><span class="title">Drunk Dial</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=7odyraJ0sSk" target="_blank" rel="noopener">
-        <img src="Images /I_m_Back_Freestyle.jpg" alt="TeeJay - I'm Back Freestyle">
+        <img loading="lazy" decoding="async" src="assets/images/i-m-back-freestyle.webp" alt="TeeJay - I'm Back Freestyle">
         <div class="r-info"><span class="artist">TeeJay</span><span class="title">I'm Back Freestyle</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=MNdzWJAGCgA" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/MNdzWJAGCgA/hqdefault.jpg" alt="Mizzofficial - Lightning Mcqueen">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/MNdzWJAGCgA/hqdefault.jpg" alt="Mizzofficial - Lightning Mcqueen">
         <div class="r-info"><span class="artist">Mizzofficial</span><span class="title">Lightning Mcqueen</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=KxIU_V75AOc" target="_blank" rel="noopener">
-        <img src="Images /MIM.jpg" alt="MIM - WEAZY">
+        <img loading="lazy" decoding="async" src="assets/images/mim.webp" alt="MIM - WEAZY">
         <div class="r-info"><span class="artist">MIM</span><span class="title">WEAZY (EP)</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=BHayBofoqSQ" target="_blank" rel="noopener">
-        <img src="Images /IGORANCE IS BLISS.jpg" alt="Noaah - Ignorance Is Bliss">
+        <img loading="lazy" decoding="async" src="assets/images/igorance-is-bliss.webp" alt="Noaah - Ignorance Is Bliss">
         <div class="r-info"><span class="artist">Noaah</span><span class="title">Ignorance Is Bliss</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=Rvm-QvUnS9g" target="_blank" rel="noopener">
-        <img src="Images /RED FLAG.jpg" alt="Noaah - Red Flag (Endless Love)">
+        <img loading="lazy" decoding="async" src="assets/images/red-flag.webp" alt="Noaah - Red Flag (Endless Love)">
         <div class="r-info"><span class="artist">Noaah</span><span class="title">Red Flag (Endless Love)</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=6fmKuH7Gdsw" target="_blank" rel="noopener">
-        <img src="Images /ITS US.jpg" alt="Noaah feat. AstrowBeatz - IT'S US">
+        <img loading="lazy" decoding="async" src="assets/images/its-us.webp" alt="Noaah feat. AstrowBeatz - IT'S US">
         <div class="r-info"><span class="artist">Noaah </span><span class="title">IT'S US (EP)</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=c5IetuNRnKU" target="_blank" rel="noopener">
-        <img src="Images /Say_It_Right.jpg" alt="Tochi - Say It Right">
+        <img loading="lazy" decoding="async" src="assets/images/say-it-right.webp" alt="Tochi - Say It Right">
         <div class="r-info"><span class="artist">Tochi</span><span class="title">Say It Right</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=KqUlzvnHW10" target="_blank" rel="noopener">
-        <img src="Images /WYTM.png" alt="Palmzz feat. Fmilli - WYTM G?">
+        <img loading="lazy" decoding="async" src="assets/images/wytm.webp" alt="Palmzz feat. Fmilli - WYTM G?">
         <div class="r-info"><span class="artist">Palmzz feat. Fmilli</span><span class="title">WYTM G?</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=nRSqCgOmahA" target="_blank" rel="noopener">
-        <img src="Images /Nails & Toes.png" alt="Palmzz - Nails &amp; Toes">
+        <img loading="lazy" decoding="async" src="assets/images/nails-toes.webp" alt="Palmzz - Nails &amp; Toes">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Nails &amp; Toes</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=XtZkNIY19jM" target="_blank" rel="noopener">
-        <img src="Images /CORRECTANDSMOOTH.jpg" alt="Idris Miles feat. Megamikes - CORRECTANDSMOOTH">
+        <img loading="lazy" decoding="async" src="assets/images/correctandsmooth.webp" alt="Idris Miles feat. Megamikes - CORRECTANDSMOOTH">
         <div class="r-info"><span class="artist">Idris Miles feat. Megamikes</span><span class="title">CORRECTANDSMOOTH</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=JUQCbIO3Y3c" target="_blank" rel="noopener">
-        <img src="Images /Amsterdam Remix.jpg" alt="Palmzz &amp; CD - Amsterdam Remix">
+        <img loading="lazy" decoding="async" src="assets/images/amsterdam-remix.webp" alt="Palmzz &amp; CD - Amsterdam Remix">
         <div class="r-info"><span class="artist">Palmzz &amp; CD</span><span class="title">Amsterdam Remix</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=NBqx1FXTA9o" target="_blank" rel="noopener">
-        <img src="Images /Body_On_My_Mind.jpg" alt="Alyssa Palmer - Body On My Mind">
+        <img loading="lazy" decoding="async" src="assets/images/body-on-my-mind.webp" alt="Alyssa Palmer - Body On My Mind">
         <div class="r-info"><span class="artist">Alyssa Palmer</span><span class="title">Body On My Mind</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=fkRj1qdJPOw" target="_blank" rel="noopener">
-        <img src="Images /BOUNCE.PNG" alt="CD - Bounce">
+        <img loading="lazy" decoding="async" src="assets/images/bounce.webp" alt="CD - Bounce">
         <div class="r-info"><span class="artist">CD</span><span class="title">Bounce</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=X8XFz0BtJks" target="_blank" rel="noopener">
-        <img src="Images /MVNCH.jpeg" alt="Mvnch - Bad Actress">
+        <img loading="lazy" decoding="async" src="assets/images/mvnch.webp" alt="Mvnch - Bad Actress">
         <div class="r-info"><span class="artist">Mvnch</span><span class="title">Bad Actress</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=_zsDQ39vovI" target="_blank" rel="noopener">
-        <img src="Images /AMSTERDAM.jpg" alt="Palmzz - Amsterdam">
+        <img loading="lazy" decoding="async" src="assets/images/amsterdam.webp" alt="Palmzz - Amsterdam">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Amsterdam</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=HvRk1_Dx_4k" target="_blank" rel="noopener">
-        <img src="Images /CRASH & MILL.jpg" alt="Palmzz - Million Jibbz">
+        <img loading="lazy" decoding="async" src="assets/images/crash-mill.webp" alt="Palmzz - Million Jibbz">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Million Jibbz</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=UMuutGg8RUs" target="_blank" rel="noopener">
-        <img src="Images /CRASH & MILL.jpg" alt="Palmzz - Crash Out">
+        <img loading="lazy" decoding="async" src="assets/images/crash-mill.webp" alt="Palmzz - Crash Out">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Crash Out</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=KhF_feOTzGQ" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/KhF_feOTzGQ/hqdefault.jpg" alt="Palmzz - U Sure?">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/KhF_feOTzGQ/hqdefault.jpg" alt="Palmzz - U Sure?">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">U Sure?</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=TJhKnF90pqY" target="_blank" rel="noopener">
-        <img src="Images /BUGGIN.jpeg" alt="Palmzz - Buggin">
+        <img loading="lazy" decoding="async" src="assets/images/buggin.webp" alt="Palmzz - Buggin">
         <div class="r-info"><span class="artist">Palmzz</span><span class="title">Buggin'</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=5hYPG9fFkwQ" target="_blank" rel="noopener">
-        <img src="Images /LDCE.jpeg" alt="Paria - Love Don't Come Easy">
+        <img loading="lazy" decoding="async" src="assets/images/ldce.webp" alt="Paria - Love Don't Come Easy">
         <div class="r-info"><span class="artist">Paria</span><span class="title">Love Don't Come Easy</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=fZXKLdoH7qk" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/fZXKLdoH7qk/hqdefault.jpg" alt="GIGI TANASE - Pull Up">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/fZXKLdoH7qk/hqdefault.jpg" alt="GIGI TANASE - Pull Up">
         <div class="r-info"><span class="artist">GIGI TANASE</span><span class="title">Pull Up</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=RMmIExtIzys" target="_blank" rel="noopener">
-        <img src="Images /The_Watchlist__Vol__1.jpg" alt="Grind And Ghost - The Watchlist Vol. 1">
+        <img loading="lazy" decoding="async" src="assets/images/the-watchlist-vol-1.webp" alt="Grind And Ghost - The Watchlist Vol. 1">
         <div class="r-info"><span class="artist">Grind And Ghost</span><span class="title">The Watchlist Vol. 1</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=4hwOsRdNQ5k" target="_blank" rel="noopener">
-        <img src="Images /Captain.jpg" alt="Noaah - Captain">
+        <img loading="lazy" decoding="async" src="assets/images/captain.webp" alt="Noaah - Captain">
         <div class="r-info"><span class="artist">Noaah</span><span class="title">Captain</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=ACPX_73rHAA" target="_blank" rel="noopener">
-        <img src="Images /Overrated.jpg" alt="ZayGwop - Overrated">
+        <img loading="lazy" decoding="async" src="assets/images/overrated.webp" alt="ZayGwop - Overrated">
         <div class="r-info"><span class="artist">ZayGwop</span><span class="title">Overrated</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=B1I5YH-6bx8" target="_blank" rel="noopener">
-        <img src="Images /Closer.jpg" alt="J1Remz - Closer">
+        <img loading="lazy" decoding="async" src="assets/images/closer.webp" alt="J1Remz - Closer">
         <div class="r-info"><span class="artist">J1Remz</span><span class="title">Closer</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=VYf77sdjCHw" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/VYf77sdjCHw/hqdefault.jpg" alt="Mizzofficial - Let's Go">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/VYf77sdjCHw/hqdefault.jpg" alt="Mizzofficial - Let's Go">
         <div class="r-info"><span class="artist">Mizzofficial</span><span class="title">Let's Go</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=q7JnUaFEaoQ" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/q7JnUaFEaoQ/hqdefault.jpg" alt="Mizzofficial X Teejay - If I Told You">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/q7JnUaFEaoQ/hqdefault.jpg" alt="Mizzofficial X Teejay - If I Told You">
         <div class="r-info"><span class="artist">Mizzofficial X Teejay</span><span class="title">If I Told You</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=1Xj27O0Co3Y" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/1Xj27O0Co3Y/hqdefault.jpg" alt="Elzee - This Life">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/1Xj27O0Co3Y/hqdefault.jpg" alt="Elzee - This Life">
         <div class="r-info"><span class="artist">Elzee</span><span class="title">This Life</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=XC8xkSfcOl8" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/XC8xkSfcOl8/hqdefault.jpg" alt="Mizzofficial - All Night">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/XC8xkSfcOl8/hqdefault.jpg" alt="Mizzofficial - All Night">
         <div class="r-info"><span class="artist">Mizzofficial</span><span class="title">All Night</span></div>
       </a>
       <a class="r-card" href="https://www.youtube.com/watch?v=LUkCPGrl8DY" target="_blank" rel="noopener">
-        <img src="https://i.ytimg.com/vi/LUkCPGrl8DY/hqdefault.jpg" alt="Loose - Toxic (DTB)">
+        <img loading="lazy" decoding="async" src="https://i.ytimg.com/vi/LUkCPGrl8DY/hqdefault.jpg" alt="Loose - Toxic (DTB)">
         <div class="r-info"><span class="artist">Loose</span><span class="title">Toxic (DTB)</span></div>
       </a>
     </div>
@@ -807,6 +832,11 @@ footer .f-logo span{color:var(--red);}
   </div>
 </div>
 
+<div id="page-achievements" class="page"><div class="page-hero"><p class="eyebrow">OUR WORK, IN NUMBERS</p><h1>MADE INDEPENDENT.<br><span class="outline-text">HEARD EVERYWHERE.</span></h1><p>The releases, the people and the milestones behind Grind and Ghost. A collection of moments worth celebrating.</p></div><section class="section plaques-section"><div class="section-head"><h2>The milestone collection</h2><span class="tag">06 RELEASE MILESTONES</span></div><div class="plaque-grid"><article class="plaque-card"><button class="plaque-open" data-plaque="assets/plaques/hold-on.jpg" data-title="Hold On — 3.2M Spotify streams" aria-label="View Hold On plaque"><img src="assets/plaques/hold-on-thumb.webp" alt="Hold On streaming milestone plaque" loading="lazy" width="700" height="990"><span class="plaque-expand">View plaque ↗</span></button><div class="plaque-info"><span class="eyebrow">Spotify streams</span><strong>3.2M</strong><h2>Hold On</h2><p>Official Budz & SK1TZ</p></div></article><article class="plaque-card"><button class="plaque-open" data-plaque="assets/plaques/all-night.jpg" data-title="All Night — 600K Digital streams · all platforms" aria-label="View All Night plaque"><img src="assets/plaques/all-night-thumb.webp" alt="All Night streaming milestone plaque" loading="lazy" width="700" height="990"><span class="plaque-expand">View plaque ↗</span></button><div class="plaque-info"><span class="eyebrow">Digital streams · all platforms</span><strong>600K</strong><h2>All Night</h2><p>Mizzofficial</p></div></article><article class="plaque-card"><button class="plaque-open" data-plaque="assets/plaques/if-i-told-you.jpg" data-title="If I Told You — 300K Digital streams · all platforms" aria-label="View If I Told You plaque"><img src="assets/plaques/if-i-told-you-thumb.webp" alt="If I Told You streaming milestone plaque" loading="lazy" width="700" height="990"><span class="plaque-expand">View plaque ↗</span></button><div class="plaque-info"><span class="eyebrow">Digital streams · all platforms</span><strong>300K</strong><h2>If I Told You</h2><p>Mizzofficial & Teejay</p></div></article><article class="plaque-card"><button class="plaque-open" data-plaque="assets/plaques/red-flag.jpg" data-title="Red Flag (Endless Love) — 100K Spotify streams" aria-label="View Red Flag (Endless Love) plaque"><img src="assets/plaques/red-flag-thumb.webp" alt="Red Flag (Endless Love) streaming milestone plaque" loading="lazy" width="700" height="990"><span class="plaque-expand">View plaque ↗</span></button><div class="plaque-info"><span class="eyebrow">Spotify streams</span><strong>100K</strong><h2>Red Flag (Endless Love)</h2><p>Noaah</p></div></article><article class="plaque-card"><button class="plaque-open" data-plaque="assets/plaques/its-us.jpg" data-title="It’s Us · EP — 100K Spotify streams" aria-label="View It’s Us · EP plaque"><img src="assets/plaques/its-us-thumb.webp" alt="It’s Us · EP streaming milestone plaque" loading="lazy" width="700" height="990"><span class="plaque-expand">View plaque ↗</span></button><div class="plaque-info"><span class="eyebrow">Spotify streams</span><strong>100K</strong><h2>It’s Us · EP</h2><p>Noaah</p></div></article><article class="plaque-card"><button class="plaque-open" data-plaque="assets/plaques/silent-mode.jpg" data-title="Silent Mode — 100K Spotify streams" aria-label="View Silent Mode plaque"><img src="assets/plaques/silent-mode-thumb.webp" alt="Silent Mode streaming milestone plaque" loading="lazy" width="700" height="990"><span class="plaque-expand">View plaque ↗</span></button><div class="plaque-info"><span class="eyebrow">Spotify streams</span><strong>100K</strong><h2>Silent Mode</h2><p>Official Budz</p></div></article></div><p class="source-note">Historical milestones from supplied plaques, shown once per release. Spotify figures and all-platform figures are labelled separately. Plaques recognise Grind And Ghost Records and/or Cameron Dankwa’s mixing and mastering work. These are recorded milestones, not live stream counts.</p></section>  <section class="section muso-section" aria-labelledby="achievements-muso-title">
+    <div class="muso-rank"><p class="eyebrow">RECOGNISED ON MUSO.AI</p><h2 id="achievements-muso-title">TOP <span>2%</span></h2><p>of Labels · Week of 15–22 October 2026</p></div>
+    <div class="muso-detail"><p class="muso-wordmark">Muso.AI <span>↗</span></p><h3>The credits behind the culture.</h3><p>Explore Grind And Ghost Records’ claimed label profile, music credits and creative connections.</p><div class="muso-numbers"><div><strong>118</strong><span>Label credits</span></div><div><strong>41</strong><span>Artists released with</span></div></div><a class="text-link" href="https://muso.ai/profile/941ac807-73e2-4c9c-a264-f2de06fcecdf" target="_blank" rel="noopener noreferrer">View our Muso.AI profile ↗</a><p class="source-note">Public profile checked 28 October 2026. Rankings and credits may change.</p></div>
+  </section>
+</div>
 <!-- ══════════════════════════════ ABOUT ══════════════════════════════ -->
 <div id="page-about" class="page">
   <div class="page-hero">
@@ -1180,7 +1210,7 @@ footer .f-logo span{color:var(--red);}
       <p>Whether you're an artist looking for a home, a brand wanting to partner, or you just want to know more about what we do — the door's open.</p>
       <a class="email" href="mailto:info@grindandghost.com">info@grindandghost.com</a>
     </div>
-    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST" onsubmit="sessionStorage.setItem('formSubmitted','1')">
+    <form action="https://formsubmit.co/7fffa3c4914cec3c7e80255e3ddc2fd7" method="POST">
       <input type="hidden" name="_subject" value="New Grind And Ghost website enquiry">
       <input type="hidden" name="_template" value="table">
       <input type="hidden" name="_next" value="https://www.grindandghost.com/contact?submitted=1">
@@ -1226,6 +1256,8 @@ footer .f-logo span{color:var(--red);}
   </div>
 </div>
 
+</main>
+<dialog id="plaqueDialog" aria-labelledby="plaqueDialogTitle"><div class="dialog-bar"><h2 id="plaqueDialogTitle"></h2><button type="button" id="closePlaque" aria-label="Close plaque">Close ×</button></div><img loading="lazy" decoding="async" id="plaqueFull" alt=""></dialog>
 <!-- FOOTER -->
 <footer id="site-footer" style="display:none;">
   <div class="f-logo">GRIND<span>AND</span>GHOST</div>
@@ -1234,9 +1266,10 @@ footer .f-logo span{color:var(--red);}
 </footer>
 
 <script>
-  const pages = ['home','artists','releases','about','podcast','repeat','studios','events','nopressure','contact'];
+  const pages = ['home','artists','releases','achievements','about','podcast','repeat','studios','events','nopressure','contact'];
   const pageSeo = {
     home: ['Grind And Ghost Records', 'Grind And Ghost Records — independent label, studios, distribution and events.'],
+    achievements: ['Achievements | Grind And Ghost', 'Explore Grind and Ghost streaming milestones, release plaques and Muso.AI accolades.'],
     artists: ['Artists | Grind And Ghost Records', 'Meet the artists building the sound of Grind And Ghost, one release at a time.'],
     releases: ['Releases | Grind And Ghost Records', 'Explore music released through Grind And Ghost Records and Repeat UK.'],
     about: ['About | Grind And Ghost Records', 'Learn about Grind And Ghost Records, our team, mission and creative community.'],
@@ -1249,52 +1282,88 @@ footer .f-logo span{color:var(--red);}
   };
 
   const heroVideo = document.getElementById('heroVideo');
+  const videoToggle = document.getElementById('videoToggle');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  let userPaused = reducedMotion.matches;
+  function updateVideoControl(){
+    const paused = heroVideo.paused;
+    videoToggle.textContent = paused ? 'Play film ▷' : 'Pause film Ⅱ';
+    videoToggle.setAttribute('aria-label', paused ? 'Play background video' : 'Pause background video');
+  }
   function startHeroVideo(){
-    if(!heroVideo || document.hidden) return;
+    if(!heroVideo || document.hidden || userPaused || !document.getElementById('page-home').classList.contains('active')) return;
     heroVideo.muted = true;
     heroVideo.defaultMuted = true;
     const playback = heroVideo.play();
-    if(playback) playback.catch(()=>{});
+    if(playback) playback.catch(updateVideoControl);
   }
-  ['loadeddata','canplay'].forEach(eventName=>heroVideo?.addEventListener(eventName,startHeroVideo));
-  document.addEventListener('visibilitychange',startHeroVideo);
+  // Respect motion preferences before the browser starts the decorative film.
+  if(userPaused){heroVideo.autoplay=false;heroVideo.pause();}
+  ['loadeddata','canplay'].forEach(eventName=>heroVideo.addEventListener(eventName,startHeroVideo));
+  ['play','pause','error'].forEach(eventName=>heroVideo.addEventListener(eventName,updateVideoControl));
+  videoToggle.addEventListener('click',()=>{
+    userPaused = !heroVideo.paused;
+    if(userPaused) heroVideo.pause(); else startHeroVideo();
+  });
+  reducedMotion.addEventListener('change',event=>{userPaused=event.matches;if(userPaused)heroVideo.pause();else startHeroVideo();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)heroVideo.pause();else startHeroVideo();});
   window.addEventListener('pageshow',startHeroVideo);
+  document.addEventListener('pointerdown',startHeroVideo,{passive:true});
+  document.addEventListener('keydown',startHeroVideo);
 
-  function go(id){
+  function go(id, push=true){
+    if(!pages.includes(id)) id='home';
     pages.forEach(p=>{
       const el = document.getElementById('page-'+p);
       if(el) el.classList.toggle('active', p===id);
     });
-    document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+    document.querySelectorAll('nav a').forEach(a=>{
+      const active=a.getAttribute('href')===(id==='home'?'/':'/'+id);
+      a.classList.toggle('active',active);
+      if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+    });
     document.getElementById('site-footer').style.display = 'flex';
     window.scrollTo({top:0,behavior:'instant'});
     document.getElementById('nav').classList.remove('open');
+    document.getElementById('burger').setAttribute('aria-expanded','false');
     document.title = pageSeo[id][0];
     document.querySelector('meta[name="description"]').setAttribute('content', pageSeo[id][1]);
-    history.pushState(null,'',id === 'home' ? '/' : `/${id}`);
+    const url=id === 'home' ? '/' : `/${id}`;
+    if(push && location.pathname!==url) history.pushState(null,'',url);
+    if(id==='home')startHeroVideo();else heroVideo.pause();
     initReveal();
   }
-
-  window.addEventListener('load',()=>{
+  function pageFromLocation(){
     const hash = location.hash.replace('#','');
     const path = location.pathname.replace(/^\/+|\/+$/g,'');
-    const initialPage = hash && pages.includes(hash) ? hash : path === 'contact-us' ? 'contact' : pages.includes(path) ? path : 'home';
-    go(initialPage);
-    const submitted = sessionStorage.getItem('formSubmitted') || new URLSearchParams(location.search).has('submitted');
-    if(submitted){
+    return hash && pages.includes(hash) ? hash : path === 'contact-us' ? 'contact' : pages.includes(path) ? path : 'home';
+  }
+  window.addEventListener('popstate',()=>go(pageFromLocation(),false));
+  document.addEventListener('DOMContentLoaded',()=>{
+    go(pageFromLocation(),false);
+    // A local submit attempt does not confirm delivery. Only the form provider's redirect does.
+    if(new URLSearchParams(location.search).has('submitted')){
       const success = document.getElementById('formSuccess');
       success.textContent = "Thanks for submitting — we'll be in touch.";
       success.style.display = 'block';
-      sessionStorage.removeItem('formSubmitted');
-      if(location.search) history.replaceState(null,'',location.pathname + location.hash);
     }
-    initReveal();
-    startHeroVideo();
+    updateVideoControl();
   });
-
   document.getElementById('burger').addEventListener('click',()=>{
-    document.getElementById('nav').classList.toggle('open');
+    const open=document.getElementById('nav').classList.toggle('open');
+    document.getElementById('burger').setAttribute('aria-expanded',String(open));
   });
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){document.getElementById('nav').classList.remove('open');document.getElementById('burger').setAttribute('aria-expanded','false');}});
+  const plaqueDialog=document.getElementById('plaqueDialog');
+  document.querySelectorAll('.plaque-open').forEach(button=>button.addEventListener('click',()=>{
+    document.getElementById('plaqueDialogTitle').textContent=button.dataset.title;
+    const img=document.getElementById('plaqueFull');img.src=button.dataset.plaque;img.alt=button.dataset.title;
+    plaqueDialog.showModal();
+  }));
+  document.getElementById('closePlaque').addEventListener('click',()=>plaqueDialog.close());
+  plaqueDialog.addEventListener('click',event=>{if(event.target===plaqueDialog)plaqueDialog.close();});
+
+  document.querySelectorAll('.svc[role=link]').forEach(card=>card.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();card.click();}}));
 
   const releaseSearch = document.getElementById('releaseSearch');
   const clearReleaseSearch = document.getElementById('clearReleaseSearch');
